@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/Environment/FlowVector.gd" type="Script" id=1]
+
+[node name="FlowVector" type="Line2D"]
+modulate = Color( 1, 1, 1, 0.0196078 )
+position = Vector2( -0.0278397, 0 )
+points = PoolVector2Array( -10, 0, 10, 0, 8, 2, 10, 0, 8, -2 )
+width = 1.0
+default_color = Color( 1, 1, 1, 1 )
+script = ExtResource( 1 )

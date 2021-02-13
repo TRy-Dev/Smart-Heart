@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://assets/images/rect1.png" type="Texture" id=1]
+
+[sub_resource type="Curve" id=1]
+max_value = 5.0
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 1, 5 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Curve" id=2]
+_data = [ Vector2( 0, 0 ), 0.0, 0.0, 0, 0, Vector2( 0.24911, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.993127, 0 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="Gradient" id=3]
+offsets = PoolRealArray( 0, 0.484496, 1 )
+colors = PoolColorArray( 1, 1, 1, 0, 1, 1, 1, 0.392157, 1, 1, 1, 0 )
+
+[node name="Dust" type="CPUParticles2D"]
+modulate = Color( 0.478431, 0.266667, 0.290196, 1 )
+z_index = 100
+amount = 30
+lifetime = 0.5
+explosiveness = 0.8
+texture = ExtResource( 1 )
+emission_shape = 1
+emission_sphere_radius = 6.0
+direction = Vector2( 0, -1 )
+spread = 20.0
+gravity = Vector2( 0, 10 )
+initial_velocity = 10.0
+linear_accel = 5.0
+damping_curve = SubResource( 1 )
+scale_amount = 4.0
+scale_amount_curve = SubResource( 2 )
+color_ramp = SubResource( 3 )

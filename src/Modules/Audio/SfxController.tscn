@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/Modules/Audio/SfxController.gd" type="Script" id=1]
+
+[node name="SfxController" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Sources" type="Node" parent="."]
+
+[node name="Sources2D" type="Node2D" parent="."]

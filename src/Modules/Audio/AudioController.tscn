@@ -1,0 +1,12 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/Modules/Audio/AudioController.gd" type="Script" id=1]
+[ext_resource path="res://src/Modules/Audio/MusicController.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Modules/Audio/SfxController.tscn" type="PackedScene" id=3]
+
+[node name="AudioController" type="Node"]
+script = ExtResource( 1 )
+
+[node name="MusicController" parent="." instance=ExtResource( 2 )]
+
+[node name="SfxController" parent="." instance=ExtResource( 3 )]

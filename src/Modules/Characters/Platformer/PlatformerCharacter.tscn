@@ -1,0 +1,32 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://src/Modules/Characters/Platformer/PlatformerCharacter.gd" type="Script" id=2]
+[ext_resource path="res://src/Modules/StateMachine/StateNameDisplay.tscn" type="PackedScene" id=3]
+[ext_resource path="res://src/Modules/Characters/Platformer/States/Move.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Modules/Characters/Platformer/States/Idle.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/Modules/Characters/Platformer/States/InAir.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/Modules/StateMachine/StateMachine.gd" type="Script" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 31.5, 31.5 )
+
+[node name="PlatformerCharacter" type="KinematicBody2D"]
+script = ExtResource( 2 )
+
+[node name="MovementStateMachine" type="Node" parent="."]
+script = ExtResource( 7 )
+
+[node name="Idle" parent="MovementStateMachine" instance=ExtResource( 5 )]
+
+[node name="Move" parent="MovementStateMachine" instance=ExtResource( 4 )]
+
+[node name="InAir" parent="MovementStateMachine" instance=ExtResource( 6 )]
+
+[node name="StateNameDisplay" parent="." instance=ExtResource( 3 )]
+margin_top = -52.7778
+margin_bottom = -38.7778
+
+[node name="Sprite" type="Sprite" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
