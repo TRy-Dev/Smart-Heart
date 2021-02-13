@@ -17,7 +17,7 @@ var _ambulances = []
 # world_pos -> heart
 var _hearts = {}
 
-var road_world_positions = []
+var heart_world_positions = []
 
 func initialize() -> void:
 	_init_city()
@@ -31,14 +31,13 @@ func _init_city() -> void:
 			var pos = cell_pos + dir
 			if buildings.get_cellv(pos) == -1:
 				roads_dict[pos] = null
+	for pos in roads_dict.keys():
+		heart_world_positions.append(GlobalConstants.grid_to_world(pos))
 	for pos in ambulance_slots.get_used_cells():
 		roads_dict[pos] = null
 	var road_cells = roads_dict.keys()
 	roads.generate(road_cells)
 	grid_navigation.initialize(roads)
-	for pos in roads.get_used_cells():
-		road_world_positions.append(GlobalConstants.grid_to_world(pos))
-#		_spawn_heart(GlobalConstants.grid_to_world(pos))
 
 func _init_ambulances() -> void:
 	for pos in ambulance_slots.get_used_cells():
@@ -53,9 +52,8 @@ func update_current_path():
 	if not selected_ambulance:
 		path.points = points
 		return
-	points = get_nav_path(selected_ambulance.get_last_nav_position(), get_global_mouse_position())
+	points = get_nav_path(selected_ambulance.get_last_nav_position(), get_global_mouse_position(), selected_ambulance.get_remaining_fuel())
 	path.points = points
-
 
 func update_ambulances(delta: float):
 	for amb in _ambulances:
@@ -70,19 +68,25 @@ func is_position_above_ambulance(pos: Vector2) -> bool:
 	return false
 
 func spawn_random_heart():
-	var pos = Rng.rand_array_element(road_world_positions)
+	var pos = Rng.rand_array_element(heart_world_positions)
 	_spawn_heart(pos)
 
 # world_pos -> world_pos
-func get_nav_path(world_pos_from: Vector2, world_pos_to: Vector2) -> PoolVector2Array:
+func get_nav_path(world_pos_from: Vector2, world_pos_to: Vector2, max_length: float) -> PoolVector2Array:
 	var grid_pos_from = roads.world_to_map(world_pos_from)
 	var grid_pos_to = roads.world_to_map(world_pos_to)
 	var points = grid_navigation.get_nav_path(grid_pos_from, grid_pos_to)
-	# Remove first point
-#	points.remove(0)
+
+	var length_left = max_length
+	var world_points = PoolVector2Array()
 	for i in range(len(points)):
-		points[i] = GlobalConstants.grid_to_world(points[i])
-	return points
+		if length_left <= 0.0:
+			break
+		world_points.append(GlobalConstants.grid_to_world(points[i]))
+		if i > 0:
+			var dist = world_points[i].distance_to(world_points[i-1])
+			length_left -= dist
+	return world_points
 
 
 func _spawn_heart(pos: Vector2):

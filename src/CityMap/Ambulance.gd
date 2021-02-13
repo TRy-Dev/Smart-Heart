@@ -8,7 +8,7 @@ onready var fsm = $StateMachine
 signal clicked(amb)
 signal fuel_updated(fuel)
 
-const START_FUEL := 500.0
+const START_FUEL := 100.0
 const SPEED := 50.0
 
 var _fuel := START_FUEL
@@ -58,31 +58,30 @@ func get_current_move_direction() -> Vector2:
 	if has_current_path():
 		var dir = (current_path[1] - get_global_position()).normalized()
 		if dir == Vector2.ZERO:
-			if len(current_path) > 2:
-				dir = (current_path[2] - get_global_position()).normalized()
-#			else:
-#				push_error("DIR 0!")
+			_pop_closest_point()
+			return get_current_move_direction()
 		return dir
 	else:
 		return Vector2.ZERO
 
-func distance_to_next_point() -> Vector2:
+func distance_to_next_point() -> float:
+	if len(current_path) < 2:
+		return 0.0
 	return get_global_position().distance_to(current_path[1])
 
-func pop_closest_point() -> void:
+func _pop_closest_point() -> void:
 	if len(current_path) > 0:
 		current_path.remove(0)
 
 func submit_path_to_mouse() -> void:
-	var path = _city_map.get_nav_path(get_last_nav_position(), get_global_mouse_position())
-#	path.remove(0)
+	var path = _city_map.get_nav_path(get_last_nav_position(), get_global_mouse_position(), get_remaining_fuel())
 	current_path.append_array(path)
 
 func force_refuel_path():
-	current_path = _city_map.get_nav_path(get_global_position(), _home_position)
+	current_path = _city_map.get_nav_path(get_global_position(), _home_position, 999999)
 
 func force_path_to(pos: Vector2):
-	current_path = _city_map.get_nav_path(get_global_position(), pos)
+	current_path = _city_map.get_nav_path(get_global_position(), pos, get_remaining_fuel())
 
 func force_path_to_mouse():
 	force_path_to(get_global_mouse_position())
@@ -100,9 +99,19 @@ func set_fuel(val: float) -> void:
 func get_fuel() -> float:
 	return _fuel
 
+func get_remaining_fuel() -> float:
+	var path_length = 0.0
+	for i in range(1, len(current_path)):
+		path_length += current_path[i].distance_to(current_path[i-1])
+	return _fuel - path_length
+
 func update_path_line() -> void:
-	current_path[0] = area_2d.global_position
+	if len(current_path) > 0:
+		current_path[0] = area_2d.global_position
 	path_line.points = current_path
+
+func is_on_home_position() -> bool:
+	return get_global_position().distance_squared_to(_home_position) < Math.EPSILON
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:

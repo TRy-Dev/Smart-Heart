@@ -34,11 +34,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Modules/Grid/World/GridNavigation.gd"
 }, {
-"base": "Node2D",
-"class": "GridWorld",
-"language": "GDScript",
-"path": "res://src/Modules/Grid/World/GridWorld.gd"
-}, {
 "base": "PlatformerState",
 "class": "OnGround",
 "language": "GDScript",
@@ -100,7 +95,6 @@ _global_script_class_icons={
 "Flocker": "",
 "FlowField": "",
 "GridNavigation": "",
-"GridWorld": "",
 "OnGround": "",
 "Pawn": "",
 "PhysicalObject2D": "",

@@ -14,6 +14,6 @@ position = Vector2( 148.492, 114.551 )
 zoom = Vector2( 0.4, 0.4 )
 
 [node name="HeartSpawnTimer" type="Timer" parent="."]
-wait_time = 2.5
+wait_time = 2.0
 autostart = true
 [connection signal="timeout" from="HeartSpawnTimer" to="." method="_on_HeartSpawnTimer_timeout"]
