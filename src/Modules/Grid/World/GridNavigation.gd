@@ -53,20 +53,20 @@ func _get_point_at(pos: Vector2, include_disabled: bool) -> int:
 
 ## GOLF Specific code - should be moved to inheriting class?
 
-func _on_pawn_created(index, pos) -> void:
-	var pt = _get_point_at(pos, false)
-	a_star.set_point_disabled(pt, true)
-	emit_signal("nav_grid_updated", a_star)
-
-func _on_pawn_destroyed(index, pos) -> void:
-	var pt = _get_point_at(pos, true)
-	a_star.set_point_disabled(pt, false)
-	emit_signal("nav_grid_updated", a_star)
-
-func _on_pawn_moved(index, pos_from, pos_to) -> void:
-	var pt_from = _get_point_at(pos_from, true)
-	var pt_to = _get_point_at(pos_to, false)
-	a_star.set_point_disabled(pt_from, false)
-	a_star.set_point_disabled(pt_to, true)
-	emit_signal("nav_grid_updated", a_star)
+#func _on_pawn_created(index, pos) -> void:
+#	var pt = _get_point_at(pos, false)
+#	a_star.set_point_disabled(pt, true)
+#	emit_signal("nav_grid_updated", a_star)
+#
+#func _on_pawn_destroyed(index, pos) -> void:
+#	var pt = _get_point_at(pos, true)
+#	a_star.set_point_disabled(pt, false)
+#	emit_signal("nav_grid_updated", a_star)
+#
+#func _on_pawn_moved(index, pos_from, pos_to) -> void:
+#	var pt_from = _get_point_at(pos_from, true)
+#	var pt_to = _get_point_at(pos_to, false)
+#	a_star.set_point_disabled(pt_from, false)
+#	a_star.set_point_disabled(pt_to, true)
+#	emit_signal("nav_grid_updated", a_star)
 

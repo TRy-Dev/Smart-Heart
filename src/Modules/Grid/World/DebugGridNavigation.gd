@@ -10,6 +10,8 @@ func _ready():
 	set_disabled(true)
 
 func _draw():
+	if disabled:
+		return
 	for c in get_children():
 		c.free()
 	for point in nav_points:
@@ -21,6 +23,8 @@ func _draw():
 func set_disabled(value: bool) -> void:
 	disabled = value
 	visible = not value
+	if not value:
+		update()
 
 func _process(delta):
 	if Input.is_action_just_pressed("toggle_debug"):
@@ -49,7 +53,5 @@ func _update_nav(a_star):
 	update()
 
 func _on_nav_grid_updated(a_star):
-	if disabled:
-		return
 	_update_nav(a_star)
 

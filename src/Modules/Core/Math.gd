@@ -1,6 +1,6 @@
 extends Node
 
-const EPSILON = 0.0001
+const EPSILON = 0.01
 
 const CARDINAL_DIRECTIONS = [Vector2.UP, Vector2.DOWN, Vector2.LEFT, Vector2.RIGHT]
 const CROSS_DIRECTIONS = [Vector2(1, 1), Vector2(1, -1), Vector2(-1, 1), Vector2(-1, -1)]

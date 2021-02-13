@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://src/CityMap.tscn" type="PackedScene" id=1]
+[ext_resource path="res://src/CityMap/CityMap.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/Main.gd" type="Script" id=2]
 [ext_resource path="res://src/Modules/Camera/CameraController.tscn" type="PackedScene" id=3]
 
@@ -12,3 +12,8 @@ script = ExtResource( 2 )
 [node name="CameraController" parent="." instance=ExtResource( 3 )]
 position = Vector2( 148.492, 114.551 )
 zoom = Vector2( 0.4, 0.4 )
+
+[node name="HeartSpawnTimer" type="Timer" parent="."]
+wait_time = 2.5
+autostart = true
+[connection signal="timeout" from="HeartSpawnTimer" to="." method="_on_HeartSpawnTimer_timeout"]

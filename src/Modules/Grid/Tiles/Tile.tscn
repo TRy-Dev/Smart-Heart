@@ -5,7 +5,8 @@
 [ext_resource path="res://assets/fonts/kenney_mini_small.tres" type="DynamicFont" id=3]
 [ext_resource path="res://src/Modules/StateMachine/StateMachine.gd" type="Script" id=4]
 [ext_resource path="res://src/Modules/Grid/Tiles/Tile.gd" type="Script" id=5]
-[ext_resource path="res://src/Tiles/Pawns/States/Idle.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/Modules/Audio/AudioController.tscn" type="PackedScene" id=6]
+
 
 [sub_resource type="Animation" id=1]
 resource_name = "_reset"

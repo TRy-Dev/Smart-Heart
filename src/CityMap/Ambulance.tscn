@@ -1,0 +1,54 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://assets/images/rect16.png" type="Texture" id=1]
+[ext_resource path="res://src/CityMap/Ambulance.gd" type="Script" id=2]
+[ext_resource path="res://src/Modules/StateMachine/StateMachine.gd" type="Script" id=3]
+[ext_resource path="res://src/CityMap/AmbulanceStates/InGarage.tscn" type="PackedScene" id=4]
+[ext_resource path="res://src/Modules/StateMachine/StateNameDisplay.tscn" type="PackedScene" id=5]
+[ext_resource path="res://src/CityMap/AmbulanceStates/Patrol.tscn" type="PackedScene" id=6]
+[ext_resource path="res://src/CityMap/AmbulanceStates/Refuel.tscn" type="PackedScene" id=7]
+[ext_resource path="res://src/CityMap/FuelDisplay.tscn" type="PackedScene" id=8]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 8, 8 )
+
+[node name="Ambulance" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 2147483650
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="Area2D"]
+modulate = Color( 0.00784314, 1, 1, 1 )
+texture = ExtResource( 1 )
+
+[node name="StateNameDisplay" parent="Area2D" instance=ExtResource( 5 )]
+margin_top = -22.0973
+margin_bottom = -8.09735
+
+[node name="FuelDisplay" parent="Area2D" instance=ExtResource( 8 )]
+margin_left = -20.0
+margin_top = 9.0
+margin_right = 20.0
+margin_bottom = 40.0
+text = "100
+"
+align = 1
+valign = 1
+
+[node name="Path" type="Line2D" parent="."]
+width = 1.0
+default_color = Color( 0.882353, 0.341176, 0.745098, 0.588235 )
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource( 3 )
+
+[node name="InGarage" parent="StateMachine" instance=ExtResource( 4 )]
+
+[node name="Patrol" parent="StateMachine" instance=ExtResource( 6 )]
+
+[node name="Refuel" parent="StateMachine" instance=ExtResource( 7 )]
+[connection signal="input_event" from="Area2D" to="." method="_on_Area2D_input_event"]
