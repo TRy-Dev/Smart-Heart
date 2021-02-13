@@ -52,7 +52,8 @@ func update_current_path():
 	if not selected_ambulance:
 		path.points = points
 		return
-	points = get_nav_path(selected_ambulance.get_last_nav_position(), get_global_mouse_position(), selected_ambulance.get_remaining_fuel())
+	points = get_nav_path(selected_ambulance.get_last_nav_position(), 
+			get_global_mouse_position(), selected_ambulance.get_remaining_fuel())
 	path.points = points
 
 func update_ambulances(delta: float):
@@ -67,16 +68,11 @@ func is_position_above_ambulance(pos: Vector2) -> bool:
 			return true
 	return false
 
-func spawn_random_heart():
-	var pos = Rng.rand_array_element(heart_world_positions)
-	_spawn_heart(pos)
-
 # world_pos -> world_pos
 func get_nav_path(world_pos_from: Vector2, world_pos_to: Vector2, max_length: float) -> PoolVector2Array:
 	var grid_pos_from = roads.world_to_map(world_pos_from)
 	var grid_pos_to = roads.world_to_map(world_pos_to)
 	var points = grid_navigation.get_nav_path(grid_pos_from, grid_pos_to)
-
 	var length_left = max_length
 	var world_points = PoolVector2Array()
 	for i in range(len(points)):
@@ -88,6 +84,9 @@ func get_nav_path(world_pos_from: Vector2, world_pos_to: Vector2, max_length: fl
 			length_left -= dist
 	return world_points
 
+func spawn_random_heart():
+	var pos = Rng.rand_array_element(heart_world_positions)
+	_spawn_heart(pos)
 
 func _spawn_heart(pos: Vector2):
 	var new_heart = heart_prefab.instance()

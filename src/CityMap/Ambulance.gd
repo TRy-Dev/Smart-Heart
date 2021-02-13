@@ -8,7 +8,7 @@ onready var fsm = $StateMachine
 signal clicked(amb)
 signal fuel_updated(fuel)
 
-const START_FUEL := 100.0
+const START_FUEL := 300.0
 const SPEED := 50.0
 
 var _fuel := START_FUEL
