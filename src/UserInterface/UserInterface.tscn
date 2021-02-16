@@ -1,0 +1,77 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://src/UserInterface/UserInterface.gd" type="Script" id=1]
+
+[node name="UserInterface" type="CanvasLayer"]
+script = ExtResource( 1 )
+
+[node name="Control" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MapUI" type="PanelContainer" parent="Control"]
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -240.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/MapUI"]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 233.0
+margin_bottom = 761.0
+
+[node name="Collected" type="Label" parent="Control/MapUI/VBoxContainer"]
+visible = false
+margin_right = 226.0
+margin_bottom = 14.0
+text = "Collected"
+
+[node name="Expired" type="Label" parent="Control/MapUI/VBoxContainer"]
+visible = false
+margin_right = 226.0
+margin_bottom = 14.0
+text = "Expired"
+
+[node name="Time" type="Label" parent="Control/MapUI/VBoxContainer"]
+margin_right = 226.0
+margin_bottom = 14.0
+text = "Time"
+
+[node name="HeartsContainer" type="HBoxContainer" parent="Control/MapUI/VBoxContainer"]
+margin_top = 18.0
+margin_right = 214.0
+margin_bottom = 18.0
+size_flags_horizontal = 2
+alignment = 1
+
+[node name="HeartsPicked" type="GridContainer" parent="Control/MapUI/VBoxContainer/HeartsContainer"]
+modulate = Color( 0.341176, 0.164706, 0.164706, 1 )
+margin_right = 140.0
+rect_min_size = Vector2( 140, 0 )
+columns = 4
+
+[node name="HeartsExpired" type="GridContainer" parent="Control/MapUI/VBoxContainer/HeartsContainer"]
+modulate = Color( 0.0980392, 0.0901961, 0.101961, 1 )
+margin_left = 144.0
+margin_right = 214.0
+rect_min_size = Vector2( 70, 0 )
+columns = 2
+
+[node name="BottomUI" type="PanelContainer" parent="Control"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -350.0
+margin_right = -241.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

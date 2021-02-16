@@ -1,11 +1,15 @@
 extends State
 
-const MIN_DIST_TO_NEXT_POINT = 0.5
+func enter(previous: State) -> void:
+	owner.play_anim("signals_on")
+
+func exit(next: State) -> void:
+	owner.play_anim("_reset")
 
 func update(input: Dictionary) -> void:
 	var dir = owner.get_current_move_direction()
 	if dir == Vector2.ZERO or owner.get_fuel() <= 0.0:
-		emit_signal("finished", "Refuel")
+		emit_signal("finished", "BackToGarage")
 		return
 	if owner.is_selected and Input.is_action_just_pressed("rmb"):
 		owner.submit_path_to_mouse()

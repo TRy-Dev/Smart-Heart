@@ -2,5 +2,15 @@ extends Node
 
 var TILE_SIZE := 16
 
-func grid_to_world(grid_pos) -> Vector2:
-	return (grid_pos + 0.5 * Vector2.ONE) * TILE_SIZE
+var _amb_names = [
+	"Alpha",
+	"Bravo",
+	"Omega",
+	"Alpha Bravo",
+]
+
+func get_amb_name_by_index(idx):
+	if idx < 0:
+		idx = 0
+	idx = idx % len(_amb_names)
+	return _amb_names[idx]

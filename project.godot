@@ -14,11 +14,6 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Modules/Physics/Boid.gd"
 }, {
-"base": "KinematicBody2D",
-"class": "DynamicCollider",
-"language": "GDScript",
-"path": "res://src/Modules/Grid/Tiles/DynamicCollider.gd"
-}, {
 "base": "Boid",
 "class": "Flocker",
 "language": "GDScript",
@@ -39,15 +34,15 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Modules/Characters/Platformer/States/OnGround.gd"
 }, {
-"base": "Tile",
-"class": "Pawn",
-"language": "GDScript",
-"path": "res://src/Modules/Grid/Tiles/Pawn.gd"
-}, {
 "base": "KinematicBody2D",
 "class": "PhysicalObject2D",
 "language": "GDScript",
 "path": "res://src/Modules/Physics/PhysicalObject2D.gd"
+}, {
+"base": "Node2D",
+"class": "Pickup",
+"language": "GDScript",
+"path": "res://src/CityMap/Pickups/Pickup.gd"
 }, {
 "base": "State",
 "class": "PlatformerState",
@@ -69,20 +64,10 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://src/Modules/StateMachine/StateMachine.gd"
 }, {
-"base": "Node2D",
-"class": "Tile",
-"language": "GDScript",
-"path": "res://src/Modules/Grid/Tiles/Tile.gd"
-}, {
 "base": "TileMap",
 "class": "TileController",
 "language": "GDScript",
 "path": "res://src/Modules/Grid/World/TileController.gd"
-}, {
-"base": "State",
-"class": "TileState",
-"language": "GDScript",
-"path": "res://src/Modules/Grid/Tiles/TileState.gd"
 }, {
 "base": "PhysicalObject2D",
 "class": "TopDownCharacter",
@@ -91,20 +76,17 @@ _global_script_classes=[ {
 } ]
 _global_script_class_icons={
 "Boid": "",
-"DynamicCollider": "",
 "Flocker": "",
 "FlowField": "",
 "GridNavigation": "",
 "OnGround": "",
-"Pawn": "",
 "PhysicalObject2D": "",
+"Pickup": "",
 "PlatformerState": "",
 "SaveGame": "",
 "State": "",
 "StateMachine": "",
-"Tile": "",
 "TileController": "",
-"TileState": "",
 "TopDownCharacter": ""
 }
 
@@ -135,6 +117,7 @@ DebugOverlay="*res://src/Modules/Core/DebugOverlay.tscn"
 PhysicsPrediction="*res://src/Modules/Physics/PhysicsPrediction.gd"
 DialogueController="*res://src/Modules/Dialogue/DialogueController.gd"
 GlobalConstants="*res://src/GlobalConstants.gd"
+Colors="*res://src/Colors.gd"
 
 [debug]
 
@@ -142,7 +125,6 @@ settings/fps/force_fps=240
 
 [display]
 
-window/size/width=1366
 window/size/height=768
 window/size/resizable=false
 window/vsync/use_vsync=false
@@ -212,4 +194,4 @@ quality/2d/use_nvidia_rect_flicker_workaround=true
 quality/2d/use_pixel_snap=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
-environment/default_clear_color=Color( 0, 0, 0, 1 )
+environment/default_clear_color=Color( 0.0784314, 0.0941176, 0.133333, 1 )

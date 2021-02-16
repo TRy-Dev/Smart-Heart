@@ -1,9 +1,10 @@
 extends Node2D
 
 onready var city_map = $CityMap
+onready var ui = $UserInterface
 
 func _ready():
-	city_map.initialize()
+	city_map.initialize(ui)
 
 func _process(delta):
 	city_map.update_current_path()
@@ -12,5 +13,4 @@ func _process(delta):
 		SceneController.reload_current()
 
 func _on_HeartSpawnTimer_timeout():
-	pass
 	city_map.spawn_random_heart()

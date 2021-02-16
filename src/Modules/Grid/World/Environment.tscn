@@ -3,7 +3,8 @@
 [ext_resource path="res://src/Modules/Grid/World/Environment.gd" type="Script" id=2]
 [ext_resource path="res://assets/images/rect16.png" type="Texture" id=4]
 [ext_resource path="res://src/Modules/Grid/World/TileGenerator.tscn" type="PackedScene" id=5]
-[ext_resource path="res://assets/rect_tilemap.tres" type="TileSet" id=6]
+[ext_resource path="res://assets/rect_tileset.tres" type="TileSet" id=6]
+
 
 [sub_resource type="TileSet" id=1]
 0/name = "rect16.png 0"
