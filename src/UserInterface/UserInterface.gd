@@ -42,12 +42,12 @@ func _clear_hearts():
 	for c in hearts_expired.get_children():
 		c.queue_free()
 
-func _on_heart_collected(h, count) -> void:
-	collected_counter.text = str(count)
+func _on_heart_collected(h) -> void:
+#	collected_counter.text = str(count)
 	_add_heart(hearts_picked)
 
-func _on_heart_expired(h, count) -> void:
-	expired_counter.text = str(count)
+func _on_heart_expired(h) -> void:
+#	expired_counter.text = str(count)
 	_add_heart(hearts_expired)
 
 func _on_time_updated(t) -> void:

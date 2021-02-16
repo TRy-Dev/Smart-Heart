@@ -9,6 +9,8 @@ var _amb_names = [
 	"Alpha Bravo",
 ]
 
+var bpm = 80
+
 func get_amb_name_by_index(idx):
 	if idx < 0:
 		idx = 0

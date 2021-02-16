@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/CityMap/Pickups/Pickup.tscn" type="PackedScene" id=1]
 [ext_resource path="res://src/CityMap/Pickups/Heart.gd" type="Script" id=2]
 [ext_resource path="res://assets/spritesheets/heart.png" type="Texture" id=3]
+[ext_resource path="res://assets/images/light_mask_iso.png" type="Texture" id=4]
 
 [sub_resource type="Animation" id=1]
 resource_name = "_reset"
@@ -20,7 +21,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id=2]
 resource_name = "hide"
-length = 0.5
+length = 0.8
 tracks/0/type = "bezier"
 tracks/0/path = NodePath("Sprite:modulate:a")
 tracks/0/interp = 1
@@ -29,25 +30,83 @@ tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
 "points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
-"times": PoolRealArray( 0, 0.5 )
+"times": PoolRealArray( 0, 0.3 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Light2D:texture_scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 0.8 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Light2D:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 2, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.8 )
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "show"
+length = 0.4
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Light2D:texture_scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0.01, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.3, 0.4 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Sprite:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Light2D:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.4 )
 }
 
 [node name="Heart" instance=ExtResource( 1 )]
 script = ExtResource( 2 )
 
 [node name="Sprite" parent="." index="0"]
+modulate = Color( 1, 1, 1, 0 )
+light_mask = 0
 texture = ExtResource( 3 )
 hframes = 6
 frame = 2
 
-[node name="AnimateFrameTimer" type="Timer" parent="." index="2"]
-wait_time = 0.1
-autostart = true
+[node name="DeathTimer" type="Timer" parent="." index="2"]
 
-[node name="DeathTimer" type="Timer" parent="." index="3"]
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="4"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="3"]
 anims/_reset = SubResource( 1 )
 anims/hide = SubResource( 2 )
-[connection signal="timeout" from="AnimateFrameTimer" to="." method="_on_AnimateFrameTimer_timeout"]
+anims/show = SubResource( 3 )
+
+[node name="Light2D" type="Light2D" parent="." index="4"]
+texture = ExtResource( 4 )
+texture_scale = 0.01
+color = Color( 0.870588, 0.0862745, 0.0862745, 1 )
+energy = 0.0
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]

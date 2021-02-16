@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://assets/rect_tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://src/Modules/Grid/World/GridNavigation.tscn" type="PackedScene" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://src/CityMap/CityMap.gd" type="Script" id=4]
 [ext_resource path="res://assets/road_iso_tileset.tres" type="TileSet" id=5]
 [ext_resource path="res://assets/buildings_iso.tres" type="TileSet" id=6]
+[ext_resource path="res://src/CityMap/HeartAnimator.tscn" type="PackedScene" id=7]
 
 [sub_resource type="Gradient" id=1]
 colors = PoolColorArray( 0.882353, 0.341176, 0.745098, 0.588235, 1, 1, 1, 0.588235 )
@@ -53,3 +54,5 @@ cell_tile_origin = 2
 cell_y_sort = true
 format = 1
 tile_data = PoolIntArray( 0, 1, 0, 1, 0, 0, 2, 0, 0, 11, 3, 0, 12, 3, 0, 65536, 0, 0, 65537, 2, 0, 65538, 1, 0, 65540, 8, 0, 65547, 3, 0, 65548, 3, 0, 131072, 0, 0, 131073, 0, 0, 131079, 9, 0, 196612, 3, 0, 196613, 3, 0, 196615, 0, 0, 196616, 0, 0, 262144, 3, 0, 262145, 3, 0, 262149, 1, 0, 262154, 3, 0, 262155, 8, 0, 327681, 3, 0, 327682, 3, 0, 327683, 10, 0, 327684, 3, 0, 327687, 0, 0, 327688, 0, 0, 393217, 10, 0, 393222, 0, 0, 393223, 2, 0, 393226, 0, 0, 393227, 0, 0, 393228, 0, 0, 458753, 10, 0, 458754, 10, 0, 458755, 3, 0, 458756, 3, 0, 458758, 3, 0, 458759, 3, 0, 458762, 0, 0, 458763, 2, 0, 458764, 1, 0, 524289, 10, 0, 524290, 10, 0, 524291, 3, 0, 524292, 3, 0, 524299, 1, 0, 589824, 3, 0, 589826, 3, 0, 589835, 0, 0, 589836, 1, 0, 655360, 3, 0, 655362, 3, 0, 655363, 8, 0, 655366, 7, 0, 655371, 0, 0, 655372, 1, 0 )
+
+[node name="HeartAnimator" parent="." instance=ExtResource( 7 )]

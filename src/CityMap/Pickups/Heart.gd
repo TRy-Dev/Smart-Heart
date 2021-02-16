@@ -3,47 +3,35 @@ extends Pickup
 export(float, 0.1, 60.0) var alive_time = 10.0
 
 onready var death_timer = $DeathTimer
-onready var anim_timer = $AnimateFrameTimer
 onready var sprite = $Sprite
 onready var anim_player = $AnimationPlayer
 
-const FRAME_COUNT = 6
-var current_frame = 0
-var frame_dir = 1
-var start_frame = 0
-var end_frame = 3
+var in_danger = false
+var collected = false
 
 func _ready():
-	anim_timer.start()
+	AnimationController.play(anim_player, "show", false)
 	death_timer.wait_time = alive_time
 	death_timer.start()
-	sprite.modulate = Color("#958b99")
+	sprite.modulate = Color("#8f0e0e")
 	yield(get_tree().create_timer(0.5 * alive_time), "timeout")
-	sprite.modulate = Color("#572a2a") 
-	start_frame = 3
-	end_frame = FRAME_COUNT - 1
+	in_danger = true
+	sprite.modulate = Color("#de1616") 
 
 func _on_area_entered(area):
 	emit_signal("collected", self)
+	collected = true
 	_destroy()
 
-func next_frame():
-	current_frame += frame_dir
-	sprite.frame = current_frame
-	if current_frame <= start_frame and frame_dir == -1:
-		current_frame = start_frame
-		frame_dir = 1
-	elif current_frame >= end_frame and frame_dir == 1:
-		current_frame = end_frame
-		frame_dir = -1
-
-func _on_AnimateFrameTimer_timeout():
-	next_frame()
+func set_current_frame(idx: int) -> void:
+	sprite.frame = idx
 
 func _on_DeathTimer_timeout():
-	emit_signal("expired", self)
-	_destroy()
+	yield(_destroy(), "completed")
+	if not collected:
+		emit_signal("expired", self)
 
 func _destroy():
-	queue_free()
 	AnimationController.play(anim_player, "hide")
+	yield(anim_player, "animation_finished")
+	queue_free()

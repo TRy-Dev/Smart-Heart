@@ -3,7 +3,17 @@ extends Node2D
 onready var city_map = $CityMap
 onready var ui = $UserInterface
 
+enum GameStates {
+	DayIntro,
+	MapGameplay,
+}
+
+const START_STATE = GameStates.DayIntro
+
+var current_day = 0
+
 func _ready():
+#	pass
 	city_map.initialize(ui)
 
 func _process(delta):

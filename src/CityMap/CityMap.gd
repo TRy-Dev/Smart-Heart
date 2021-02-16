@@ -2,14 +2,17 @@ extends Node2D
 
 signal heart_collected(h)
 signal heart_expired(h)
+signal heart_created(h)
 
 onready var buildings = $Buildings
 onready var roads = $Roads
 onready var grid_navigation = $GridNavigation
 onready var ambulance_slots = $AmbulanceSlots
+onready var heart_animator = $HeartAnimator
 
 onready var path = $Path
 onready var pawn_contaner = self #$BuildingsNice
+
 
 var ambulance_prefab = preload("res://src/CityMap/Ambulance.tscn")
 var heart_prefab = preload("res://src/CityMap/Pickups/Heart.tscn")
@@ -26,6 +29,8 @@ var heart_world_positions = []
 var hearts_collected = 0
 var hearts_expired = 0
 
+#const BPM = 60
+
 func initialize(ui) -> void:
 	_reset()
 	_init_city()
@@ -34,6 +39,10 @@ func initialize(ui) -> void:
 	connect("heart_collected", ui, "_on_heart_collected")
 	connect("heart_expired", ui, "_on_heart_expired")
 	ui.connect("ambulance_ui_clicked", self, "_on_ambulance_ui_clicked")
+	connect("heart_created", heart_animator, "_on_heart_created")
+	connect("heart_collected", heart_animator, "_on_heart_collected")
+	connect("heart_expired", heart_animator, "_on_heart_expired")
+	heart_animator.initialize(GlobalConstants.bpm)
 	buildings.visible = false
 	ambulance_slots.visible = false
 
@@ -112,6 +121,7 @@ func _spawn_heart(pos: Vector2):
 	new_heart.connect("collected", self, "_on_heart_collected")
 	new_heart.connect("expired", self, "_on_heart_expired")
 	new_heart.initialize(pos)
+	emit_signal("heart_created", new_heart)
 
 func _init_ambulances() -> void:
 	var i = 0
@@ -144,12 +154,12 @@ func _on_ambulance_selected(amb) -> void:
 func _on_heart_collected(heart) -> void:
 	_hearts.erase(heart)
 	hearts_collected += 1
-	emit_signal("heart_collected", heart, hearts_collected)
+	emit_signal("heart_collected", heart)
 
 func _on_heart_expired(heart) -> void:
 	_hearts.erase(heart)
 	hearts_expired += 1
-	emit_signal("heart_expired", heart, hearts_expired)
+	emit_signal("heart_expired", heart)
 
 func _unhandled_input(event):
 	if event is InputEventKey:
