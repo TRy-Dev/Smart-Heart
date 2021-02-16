@@ -2,11 +2,15 @@ extends Node
 
 var TILE_SIZE := 16
 
+# https://www.nobelprize.org/prizes/lists/all-nobel-laureates-in-physiology-or-medicine/
 var _amb_names = [
-	"Alpha",
-	"Bravo",
-	"Omega",
-	"Alpha Bravo",
+	["Alter", "Allison", "Axel", "Arber", "Axelrod", "Adrian"],
+	["Beutler", "Blackburn", "Barré-Sinoussi", "Buck", "Brenner", 
+		"Blobel", "Bishop", "Black", "Brown", "Bergström", "Benacerraf", 
+		"Blumberg", "Baltimore", "Bloch", "Békésy", "Burnet", "Beadle", 
+		"Bovet", "Banting", "Bordet", "Bárány", "Behring"],
+	["Ochoa", "Ohsumi"],
+	["Karl Landsteiner"],
 ]
 
 var _DAY_DATA = {
@@ -26,7 +30,8 @@ func get_amb_name_by_index(idx):
 	if idx < 0:
 		idx = 0
 	idx = idx % len(_amb_names)
-	return _amb_names[idx]
+	var amb_name = Rng.rand_array_element(_amb_names[idx])
+	return amb_name
 
 const DEFAULT_DAY = 0
 func day_data(day_idx):
