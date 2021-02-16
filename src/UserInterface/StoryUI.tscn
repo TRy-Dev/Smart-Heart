@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/UserInterface/StoryUI.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/kenney_title.tres" type="DynamicFont" id=2]
+[ext_resource path="res://assets/fonts/kenney_mini.tres" type="DynamicFont" id=3]
+
+[node name="StoryUI" type="PanelContainer"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = -350.0
+margin_right = -241.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 7.0
+margin_top = 7.0
+margin_right = 1118.0
+margin_bottom = 343.0
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+margin_right = 1111.0
+margin_bottom = 72.0
+custom_fonts/font = ExtResource( 2 )
+text = "STORY PLACEHOLDER"
+align = 1
+valign = 1
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+margin_top = 76.0
+margin_right = 1111.0
+margin_bottom = 112.0
+focus_mode = 0
+custom_fonts/font = ExtResource( 3 )
+enabled_focus_mode = 0
+text = "START DAY X"
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]

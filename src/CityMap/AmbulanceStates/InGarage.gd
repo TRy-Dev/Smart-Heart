@@ -1,6 +1,6 @@
 extends State
 
-const FUEL_REGEN_SPEED = 60.0
+const FUEL_REGEN_SPEED = 90.0
 
 #func enter(previous: State) -> void:
 #	owner.refuel()

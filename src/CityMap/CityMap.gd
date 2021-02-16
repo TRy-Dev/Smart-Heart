@@ -9,6 +9,8 @@ onready var roads = $Roads
 onready var grid_navigation = $GridNavigation
 onready var ambulance_slots = $AmbulanceSlots
 onready var heart_animator = $HeartAnimator
+onready var buildings_nice = $BuildingsNice
+onready var heart_spawn_timer = $HeartSpawnTimer
 
 onready var path = $Path
 onready var pawn_contaner = self #$BuildingsNice
@@ -31,44 +33,45 @@ var hearts_expired = 0
 
 #const BPM = 60
 
+var _ui = null
+var _day_idx = -1
+
 func initialize(ui) -> void:
-	_reset()
-	_init_city()
-	_init_ambulances()
-	ui.init_ambulances(_ambulances)
+	_ui = ui
+	reset()
 	connect("heart_collected", ui, "_on_heart_collected")
 	connect("heart_expired", ui, "_on_heart_expired")
 	ui.connect("ambulance_ui_clicked", self, "_on_ambulance_ui_clicked")
 	connect("heart_created", heart_animator, "_on_heart_created")
 	connect("heart_collected", heart_animator, "_on_heart_collected")
 	connect("heart_expired", heart_animator, "_on_heart_expired")
-	heart_animator.initialize(GlobalConstants.bpm)
 	buildings.visible = false
 	ambulance_slots.visible = false
 
-func _reset():
+func start_day(day_idx) -> void:
+	reset()
+	_day_idx = day_idx
+	heart_animator.initialize(day_idx)
+	_init_city()
+	_init_ambulances()
+	_ui.init_gameplay(_ambulances)
+	buildings_nice.visible = true
+	heart_spawn_timer.wait_time = GlobalConstants.day_data(day_idx).heart_spawn_rate
+	heart_spawn_timer.start()
+
+func reset():
+	path.points = PoolVector2Array()
+	roads.clear()
+	heart_spawn_timer.stop()
 	for h in _hearts.values():
-		h.queue_free()
+		if h != null:
+			h.queue_free()
 	_hearts = {}
 	for a in _ambulances:
 		a.queue_free()
 	_ambulances = []
-
-func _init_city() -> void:
-	var building_cells = buildings.get_used_cells()
-	var roads_dict = {}
-	for cell_pos in building_cells:
-		for dir in Math.CARDINAL_DIRECTIONS + Math.CROSS_DIRECTIONS:
-			var pos = cell_pos + dir
-			if buildings.get_cellv(pos) == -1:
-				roads_dict[pos] = null
-	for pos in roads_dict.keys():
-		heart_world_positions.append(get_road_center_position(pos))
-	for pos in ambulance_slots.get_used_cells():
-		roads_dict[pos] = null
-	var road_cells = roads_dict.keys()
-	roads.generate(road_cells)
-	grid_navigation.initialize(roads)
+	buildings_nice.visible = false
+	heart_animator.stop()
 
 func update_current_path():
 	var points = PoolVector2Array()
@@ -82,14 +85,6 @@ func update_current_path():
 func update_ambulances(delta: float):
 	for amb in _ambulances:
 		amb.update_amb(delta)
-
-func is_position_above_ambulance(pos: Vector2) -> bool:
-	var MAX_DIST_SQ = pow((GlobalConstants.TILE_SIZE * 0.5), 2.0)
-	for amb in _ambulances:
-		var dist = amb.get_global_position().distance_squared_to(pos)
-		if dist < MAX_DIST_SQ:
-			return true
-	return false
 
 func get_road_center_position(grid_pos) -> Vector2:
 	return roads.map_to_world(grid_pos) + Vector2.DOWN * GlobalConstants.TILE_SIZE * 0.5
@@ -120,7 +115,7 @@ func _spawn_heart(pos: Vector2):
 	_hearts[pos] = new_heart
 	new_heart.connect("collected", self, "_on_heart_collected")
 	new_heart.connect("expired", self, "_on_heart_expired")
-	new_heart.initialize(pos)
+	new_heart.initialize(pos, _day_idx)
 	emit_signal("heart_created", new_heart)
 
 func _init_ambulances() -> void:
@@ -132,6 +127,22 @@ func _init_ambulances() -> void:
 		amb.connect("selected", self, "_on_ambulance_selected")
 		amb.initialize(get_road_center_position(pos), self, i)
 		i += 1
+
+func _init_city() -> void:
+	var building_cells = buildings.get_used_cells()
+	var roads_dict = {}
+	for cell_pos in building_cells:
+		for dir in Math.CARDINAL_DIRECTIONS + Math.CROSS_DIRECTIONS:
+			var pos = cell_pos + dir
+			if buildings.get_cellv(pos) == -1:
+				roads_dict[pos] = null
+	for pos in roads_dict.keys():
+		heart_world_positions.append(get_road_center_position(pos))
+	for pos in ambulance_slots.get_used_cells():
+		roads_dict[pos] = null
+	var road_cells = roads_dict.keys()
+	roads.generate(road_cells)
+	grid_navigation.initialize(roads)
 
 func _get_random_free_position():
 	var pos = Rng.rand_array_element(heart_world_positions)
@@ -177,3 +188,6 @@ func _select_ambulance_by_id(idx):
 		return
 	if _ambulances[idx].fsm.current_state.name != "BackToGarage":
 		_ambulances[idx].select()
+
+func _on_HeartSpawnTimer_timeout():
+	spawn_random_heart()
