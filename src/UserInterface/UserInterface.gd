@@ -28,7 +28,7 @@ func init_gameplay(ambulances) -> void:
 		var amb = ambulances[i]
 		var amb_ui = amb_ui_prefab.instance()
 		ambulance_container.add_child(amb_ui)
-		ambulance_container.move_child(amb_ui, i)
+		ambulance_container.move_child(amb_ui, i + 1)
 		_ambulance_uis.append(amb_ui)
 		amb_ui.initialize(amb, i)
 		amb_ui.connect("ambulance_ui_clicked", self, "_on_ambulance_ui_clicked")

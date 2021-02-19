@@ -2,8 +2,8 @@ extends State
 
 const FUEL_REGEN_SPEED = 90.0
 
-#func enter(previous: State) -> void:
-#	owner.refuel()
+func enter(previous: State) -> void:
+	owner.force_remove_path()
 
 func update(input: Dictionary) -> void:
 	owner.update_fuel_delta(input["delta"] * FUEL_REGEN_SPEED)

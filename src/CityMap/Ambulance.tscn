@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/images/ambulance_iso.png" type="Texture" id=1]
 [ext_resource path="res://src/CityMap/Ambulance.gd" type="Script" id=2]
@@ -9,13 +9,15 @@
 [ext_resource path="res://src/CityMap/AmbulanceStates/BackToGarage.tscn" type="PackedScene" id=7]
 [ext_resource path="res://src/CityMap/FuelDisplay.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/images/light_mask_iso_big.png" type="Texture" id=9]
-[ext_resource path="res://assets/fonts/kenney_mini_small.tres" type="DynamicFont" id=10]
+[ext_resource path="res://assets/fonts/kenney_mini_8px.tres" type="DynamicFont" id=10]
+[ext_resource path="res://assets/images/selected.png" type="Texture" id=11]
+[ext_resource path="res://assets/themes/ambulance_ui.tres" type="Theme" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 6, 6 )
 
 [sub_resource type="Gradient" id=2]
-colors = PoolColorArray( 0.4, 0.501961, 1, 0.588235, 1, 1, 1, 0.588235 )
+colors = PoolColorArray( 0.560784, 0.054902, 0.054902, 0.392157, 0.870588, 0.0862745, 0.0862745, 0.196078 )
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -85,12 +87,14 @@ frame = 1
 [node name="LightLeft" type="Light2D" parent="Area2D/Sprite"]
 position = Vector2( 2.41316, -5.38375 )
 texture = ExtResource( 9 )
+texture_scale = 2.0
 color = Color( 1, 0, 0, 1 )
 energy = 2.0
 
 [node name="LightRight" type="Light2D" parent="Area2D/Sprite"]
 position = Vector2( 3.8147e-06, -4.13908 )
 texture = ExtResource( 9 )
+texture_scale = 2.0
 color = Color( 0, 0, 1, 1 )
 energy = 0.0
 
@@ -99,24 +103,6 @@ visible = false
 light_mask = 0
 margin_top = -22.0973
 margin_bottom = -8.09735
-
-[node name="Name" type="Label" parent="Area2D"]
-modulate = Color( 1, 1, 1, 0.392157 )
-light_mask = 0
-margin_left = -18.5
-margin_top = -22.0973
-margin_right = 18.5
-margin_bottom = -8.09732
-grow_horizontal = 2
-grow_vertical = 2
-custom_fonts/font = ExtResource( 10 )
-text = "STATE"
-align = 1
-valign = 1
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
-}
 
 [node name="FuelDisplay" parent="Area2D" instance=ExtResource( 8 )]
 visible = false
@@ -129,6 +115,60 @@ text = "100
 "
 align = 1
 valign = 1
+
+[node name="SelectedHighlight" type="Sprite" parent="Area2D"]
+modulate = Color( 0.8, 0.6, 0.6, 1 )
+texture = ExtResource( 11 )
+
+[node name="UI" type="Node2D" parent="Area2D"]
+z_index = 2
+
+[node name="Control" type="Control" parent="Area2D/UI"]
+margin_top = -15.7331
+margin_bottom = -15.7331
+theme = ExtResource( 12 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FuelBar" type="ProgressBar" parent="Area2D/UI/Control"]
+light_mask = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -15.0
+margin_top = -3.5
+margin_right = 15.0
+margin_bottom = 3.5
+rect_min_size = Vector2( 30, 0 )
+mouse_filter = 2
+percent_visible = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Name" type="Label" parent="Area2D/UI/Control"]
+modulate = Color( 1, 1, 1, 0.392157 )
+light_mask = 0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -18.5
+margin_top = -7.26485
+margin_right = 18.5
+margin_bottom = 6.73513
+grow_horizontal = 2
+grow_vertical = 2
+custom_fonts/font = ExtResource( 10 )
+text = "NAME"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
 
 [node name="Path" type="Line2D" parent="."]
 width = 1.0

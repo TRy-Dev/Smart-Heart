@@ -1,23 +1,31 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=3 format=2]
 
 [ext_resource path="res://src/UserInterface/MapUI.gd" type="Script" id=1]
+[ext_resource path="res://assets/themes/ambulance_ui.tres" type="Theme" id=2]
 
 [node name="MapUI" type="PanelContainer"]
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -326.0
+margin_left = -360.0
 mouse_filter = 2
+theme = ExtResource( 2 )
 script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-margin_left = 7.0
-margin_top = 7.0
-margin_right = 319.0
-margin_bottom = 761.0
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 356.0
+margin_bottom = 764.0
+custom_constants/separation = 20
+
+[node name="PADDING" type="Control" parent="VBoxContainer"]
+margin_right = 352.0
+margin_bottom = 80.0
+rect_min_size = Vector2( 0, 80 )
 
 [node name="Collected" type="Label" parent="VBoxContainer"]
 visible = false
@@ -38,21 +46,23 @@ margin_bottom = 14.0
 text = "Time"
 
 [node name="HeartsContainer" type="HBoxContainer" parent="VBoxContainer"]
-margin_right = 214.0
-size_flags_horizontal = 2
+margin_top = 100.0
+margin_right = 352.0
+margin_bottom = 100.0
 alignment = 1
 
 [node name="HeartsPicked" type="GridContainer" parent="VBoxContainer/HeartsContainer"]
-modulate = Color( 0.341176, 0.164706, 0.164706, 1 )
-margin_right = 140.0
+modulate = Color( 0.560784, 0.054902, 0.054902, 1 )
+margin_left = 34.0
+margin_right = 174.0
 rect_min_size = Vector2( 140, 0 )
-columns = 3
+columns = 4
 
 [node name="HeartsExpired" type="GridContainer" parent="VBoxContainer/HeartsContainer"]
-modulate = Color( 0.0980392, 0.0901961, 0.101961, 1 )
-margin_left = 144.0
-margin_right = 214.0
-rect_min_size = Vector2( 70, 0 )
-columns = 3
+modulate = Color( 0.054902, 0.168627, 0.0980392, 1 )
+margin_left = 178.0
+margin_right = 318.0
+rect_min_size = Vector2( 140, 0 )
+columns = 4
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]

@@ -5,9 +5,9 @@ onready var _sources_2d = $Sources2D
 
 var _clips := {}
 
-const MAX_AUDIO_SOURCES := 4
-const MIN_PITCH := 0.9
-const MAX_PITCH := 1.1
+const MAX_AUDIO_SOURCES := 8
+const MIN_PITCH := 0.95
+const MAX_PITCH := 1.05
 const SFX_PATH := "res://assets/audio/sfx"
 
 const SOURCE_2D_MAX_DISTANCE := 200.0
@@ -18,12 +18,12 @@ const VOLUME_DB = -15
 func _init():
 	self.load()
 
-func play(name: String) -> void:
+func play(name: String, volume_db := 0) -> void:
 	if not name in _clips:
 		push_error("HEY! No such audio clip: %s" %name)
 		return
 	var source = _get_idle_source(_sources_0d, AudioStreamPlayer)
-	_play_audio(source, name)
+	_play_audio(source, name, volume_db)
 
 func play_at(name: String, position: Vector2) -> void:
 	if not name in _clips:
@@ -51,11 +51,12 @@ func _get_idle_source(sources_parent, template):
 	else:
 		push_error("HEY! Trying to play more than %s audio clips at the same time" % MAX_AUDIO_SOURCES)
 
-func _play_audio(source, name: String):
+func _play_audio(source, name: String, volume_db := 0):
 	if not source:
 		return
 	source.stream = _clips[name][Rng.randi(0, len(_clips[name]) - 1)]
 	source.pitch_scale = Rng.randf(MIN_PITCH, MAX_PITCH)
+	source.volume_db = clamp(volume_db, -80, 0)
 	source.play()
 
 func load():

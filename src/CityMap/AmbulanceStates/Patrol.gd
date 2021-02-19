@@ -1,10 +1,14 @@
 extends State
 
+onready var audio = $AudioStreamPlayer
+
 func enter(previous: State) -> void:
 	owner.play_anim("signals_on")
+	audio.play()
 
 func exit(next: State) -> void:
 	owner.play_anim("_reset")
+	audio.stop()
 
 func update(input: Dictionary) -> void:
 	var dir = owner.get_current_move_direction()
@@ -19,3 +23,9 @@ func update(input: Dictionary) -> void:
 	owner.update_global_position(dir * delta_pos_mag)
 	owner.update_fuel_delta(-delta_pos_mag)
 	owner.update_path_line()
+	
+	if owner.is_selected:
+		audio.volume_db = -16
+	else:
+		audio.volume_db = -24
+

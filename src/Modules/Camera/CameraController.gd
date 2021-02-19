@@ -26,9 +26,8 @@ var noise_seed = 0
 var _target = null
 
 var _zoom_levels = {
-	"close": 0.2,
-	"medium": 0.25,
-	"far": 0.3,
+	"close": 0.35,
+	"far": 0.5,
 }
 
 func _ready():

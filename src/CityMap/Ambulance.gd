@@ -5,14 +5,17 @@ onready var path_line = $Path
 onready var area_2d = $Area2D
 onready var fsm = $StateMachine
 onready var anim_player = $AnimationPlayer
-onready var name_label = $Area2D/Name
+onready var selected_highlight = $Area2D/SelectedHighlight
+
+onready var name_label = $Area2D/UI/Control/Name
+onready var fuel_bar = $Area2D/UI/Control/FuelBar
 
 signal selected(amb)
 signal fuel_updated(fuel)
 signal position_changed(delta)
 
-const START_FUEL := 300.0
-const SPEED := 50.0
+const START_FUEL := 256.0
+const SPEED := 42.0
 
 var _fuel := START_FUEL
 var current_path := PoolVector2Array()
@@ -29,6 +32,7 @@ func initialize(pos, city_map, idx):
 	_home_position = pos
 	ambulance_name = GlobalConstants.get_amb_name_by_index(idx)
 	name_label.text = ambulance_name
+	fuel_bar.max_value = START_FUEL
 	set_selected(false)
 	fsm.connect("state_changed", $Area2D/StateNameDisplay, "_on_state_changed")
 	connect("fuel_updated", $Area2D/FuelDisplay, "_on_fuel_updated")
@@ -66,7 +70,10 @@ func get_last_nav_position() -> Vector2:
 	return current_path[len(current_path) - 1]
 
 func set_selected(value: bool) -> void:
+	if value and not is_selected and fsm.current_state.name == "InGarage":
+		AudioController.sfx.play("car_start", -8)
 	is_selected = value
+	selected_highlight.visible = value
 
 func has_current_path() -> bool:
 	return len(current_path) > 1
@@ -94,6 +101,9 @@ func submit_path_to_mouse() -> void:
 	var path = _city_map.get_nav_path(get_last_nav_position(), get_global_mouse_position(), get_remaining_fuel())
 	current_path.append_array(path)
 
+func force_remove_path():
+	current_path = PoolVector2Array()
+
 func force_refuel_path():
 	current_path = _city_map.get_nav_path(get_global_position(), _home_position, 999999)
 
@@ -108,6 +118,9 @@ func update_fuel_delta(delta: float) -> void:
 
 func set_fuel(val: float) -> void:
 	_fuel = clamp(val, 0.0, START_FUEL)
+	fuel_bar.value = _fuel
+	fuel_bar.modulate.a = (START_FUEL - _fuel) / START_FUEL
+	fuel_bar.modulate.a = min(0.5, fuel_bar.modulate.a)
 	emit_signal("fuel_updated", _fuel)
 
 func get_fuel() -> float:
@@ -142,3 +155,5 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 		if event.button_index == BUTTON_LEFT and event.pressed:
 			if not fsm.current_state.name == "BackToGarage":
 				select()
+			else:
+				AudioController.sfx.play("ui_fail", -8)

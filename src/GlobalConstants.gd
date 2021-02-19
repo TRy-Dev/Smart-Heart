@@ -18,19 +18,52 @@ var _DAY_DATA = {
 		"bpm": 80,
 		"heart_alive_time": 12.0,
 		"heart_spawn_rate": 2.5,
+		"extra_amb": false,
+		"start_delay": 5.0,
 	},
 	1: {
-		"bpm": 240,
-		"heart_alive_time": 5.0,
-		"heart_spawn_rate": 1.0,
-	}
+		"bpm": 80,
+		"heart_alive_time": 12.0,
+		"heart_spawn_rate": 2.0,
+		"extra_amb": false,
+		"start_delay": 3.0,
+	},
+	2: {
+		"bpm": 80,
+		"heart_alive_time": 9.0,
+		"heart_spawn_rate": 2.0,
+		"extra_amb": false,
+		"start_delay": 1.0,
+	},
+	3: {
+		"bpm": 80,
+		"heart_alive_time": 9.0,
+		"heart_spawn_rate": 2.0,
+		"extra_amb": true,
+		"start_delay": 1.0,
+	},
+#	4: {
+#		"bpm": 80,
+#		"heart_alive_time": 9.0,
+#		"heart_spawn_rate": 2.0,
+#		"extra_amb": true,
+#		"start_delay": 1.0,
+#		"traffic": true,
+#	}
 }
+
+var _amb_names_this_session = []
+
+func _ready():
+	# Generate amb names
+	for i in range(len(_amb_names)):
+		_amb_names_this_session.append(Rng.rand_array_element(_amb_names[i]))
 
 func get_amb_name_by_index(idx):
 	if idx < 0:
 		idx = 0
 	idx = idx % len(_amb_names)
-	var amb_name = Rng.rand_array_element(_amb_names[idx])
+	var amb_name = _amb_names_this_session[idx] #Rng.rand_array_element(_amb_names[idx])
 	return amb_name
 
 const DEFAULT_DAY = 0
@@ -39,6 +72,3 @@ func day_data(day_idx):
 		print("Could not find data for day_idx %s. Returning default day_idx %s" %[day_idx, DEFAULT_DAY])
 		return _DAY_DATA[DEFAULT_DAY]
 	return _DAY_DATA[day_idx]
-
-
-

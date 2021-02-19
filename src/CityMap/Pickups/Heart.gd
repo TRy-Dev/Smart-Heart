@@ -15,7 +15,8 @@ func initialize(pos: Vector2, day_idx: int) -> void:
 	AnimationController.play(anim_player, "show", false)
 	death_timer.wait_time = alive_time
 	death_timer.start()
-	sprite.modulate = Color("#8f0e0e")
+#	sprite.modulate = Color("#8f0e0e")
+	sprite.modulate = Color("#de1616")
 	yield(get_tree().create_timer(0.5 * alive_time), "timeout")
 	in_danger = true
 	sprite.modulate = Color("#de1616")

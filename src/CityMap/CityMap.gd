@@ -11,9 +11,11 @@ onready var ambulance_slots = $AmbulanceSlots
 onready var heart_animator = $HeartAnimator
 onready var buildings_nice = $BuildingsNice
 onready var heart_spawn_timer = $HeartSpawnTimer
+onready var no_road = $NoRoad
+onready var extra_amb_slots = $ExtraAmbulance
 
 onready var path = $Path
-onready var pawn_contaner = self #$BuildingsNice
+onready var pawn_contaner = $AmbContainer #$BuildingsNice
 
 
 var ambulance_prefab = preload("res://src/CityMap/Ambulance.tscn")
@@ -45,21 +47,31 @@ func initialize(ui) -> void:
 	connect("heart_created", heart_animator, "_on_heart_created")
 	connect("heart_collected", heart_animator, "_on_heart_collected")
 	connect("heart_expired", heart_animator, "_on_heart_expired")
-	buildings.visible = false
-	ambulance_slots.visible = false
+	buildings.visible = true
+	ambulance_slots.visible = true
+	no_road.visible = false
+	extra_amb_slots.visible = false
 
 func start_day(day_idx) -> void:
 	reset()
 	_day_idx = day_idx
 	heart_animator.initialize(day_idx)
-	_init_city()
-	_init_ambulances()
+	_init_city(day_idx)
+	_init_ambulances(day_idx)
 	_ui.init_gameplay(_ambulances)
 	buildings_nice.visible = true
+	buildings.visible = true
+	ambulance_slots.visible = true
 	heart_spawn_timer.wait_time = GlobalConstants.day_data(day_idx).heart_spawn_rate
+	yield(get_tree().create_timer(GlobalConstants.day_data(day_idx).start_delay), "timeout")
 	heart_spawn_timer.start()
 
+func stop_spawning_hearts() -> void:
+	heart_spawn_timer.stop()
+
 func reset():
+	hearts_collected = 0
+	hearts_expired = 0
 	path.points = PoolVector2Array()
 	roads.clear()
 	heart_spawn_timer.stop()
@@ -71,6 +83,8 @@ func reset():
 		a.queue_free()
 	_ambulances = []
 	buildings_nice.visible = false
+	buildings.visible = false
+	ambulance_slots.visible = false
 	heart_animator.stop()
 
 func update_current_path():
@@ -109,6 +123,9 @@ func spawn_random_heart():
 	var pos = _get_random_free_position()
 	_spawn_heart(pos)
 
+func heart_count() -> int:
+	return _hearts.size()
+
 func _spawn_heart(pos: Vector2):
 	var new_heart = heart_prefab.instance()
 	pawn_contaner.add_child(new_heart)
@@ -118,9 +135,11 @@ func _spawn_heart(pos: Vector2):
 	new_heart.initialize(pos, _day_idx)
 	emit_signal("heart_created", new_heart)
 
-func _init_ambulances() -> void:
+func _init_ambulances(day_idx: int) -> void:
+	var positions_sorted = ambulance_slots.get_used_cells()
+	positions_sorted.sort_custom(self, "_ambulance_sort")
 	var i = 0
-	for pos in ambulance_slots.get_used_cells():
+	for pos in positions_sorted: #ambulance_slots.get_used_cells():
 		var amb = ambulance_prefab.instance()
 		pawn_contaner.add_child(amb)
 		_ambulances.append(amb)
@@ -128,7 +147,10 @@ func _init_ambulances() -> void:
 		amb.initialize(get_road_center_position(pos), self, i)
 		i += 1
 
-func _init_city() -> void:
+func _ambulance_sort(a, b):
+	return get_road_center_position(a).x < get_road_center_position(b).x
+
+func _init_city(day_idx: int) -> void:
 	var building_cells = buildings.get_used_cells()
 	var roads_dict = {}
 	for cell_pos in building_cells:
@@ -136,8 +158,15 @@ func _init_city() -> void:
 			var pos = cell_pos + dir
 			if buildings.get_cellv(pos) == -1:
 				roads_dict[pos] = null
+	for pos in no_road.get_used_cells():
+		roads_dict.erase(pos)
 	for pos in roads_dict.keys():
 		heart_world_positions.append(get_road_center_position(pos))
+	for pos in extra_amb_slots.get_used_cells():
+		if GlobalConstants.day_data(day_idx).extra_amb:
+			ambulance_slots.set_cellv(pos, 0)
+		else:
+			ambulance_slots.set_cellv(pos, -1)
 	for pos in ambulance_slots.get_used_cells():
 		roads_dict[pos] = null
 	var road_cells = roads_dict.keys()
@@ -156,6 +185,10 @@ func _get_random_free_position():
 	return pos
 
 func _on_ambulance_selected(amb) -> void:
+	if amb == selected_ambulance:
+		return
+	if amb and amb.is_selected:
+		return
 	if selected_ambulance:
 		selected_ambulance.set_selected(false)
 	if amb:
@@ -163,13 +196,15 @@ func _on_ambulance_selected(amb) -> void:
 	selected_ambulance = amb
 
 func _on_heart_collected(heart) -> void:
-	_hearts.erase(heart)
+	_hearts.erase(heart.global_position)
 	hearts_collected += 1
+	AudioController.sfx.play("heart_collected", -8)
 	emit_signal("heart_collected", heart)
 
 func _on_heart_expired(heart) -> void:
-	_hearts.erase(heart)
+	_hearts.erase(heart.global_position)
 	hearts_expired += 1
+	AudioController.sfx.play("heart_expired", -8)
 	emit_signal("heart_expired", heart)
 
 func _unhandled_input(event):
@@ -188,6 +223,8 @@ func _select_ambulance_by_id(idx):
 		return
 	if _ambulances[idx].fsm.current_state.name != "BackToGarage":
 		_ambulances[idx].select()
+	else:
+		AudioController.sfx.play("ui_fail", -8)
 
 func _on_HeartSpawnTimer_timeout():
 	spawn_random_heart()
