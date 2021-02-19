@@ -11,10 +11,17 @@ func _ready():
 	call_deferred("_initialize")
 
 func start_dialogue(name: String) -> Dictionary:
-#	print("HEY! Resetting all dialogues. Temprary workaround")
-#	_load_story(story_path)
 	story.choose_path_string(name)
 	return _get_current_dialogue()
+
+func extract_text(name: String) -> String:
+	story.choose_path_string(name)
+	var dialogue = _get_current_dialogue()
+	var text = ""
+	for line in dialogue.lines:
+		text += line
+	return text
+	
 
 func select_option(index: int) -> Dictionary:
 	story.choose_choice_index(index)

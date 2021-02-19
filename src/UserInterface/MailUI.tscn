@@ -1,12 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/themes/ambulance_ui.tres" type="Theme" id=1]
 [ext_resource path="res://assets/images/amb_ui.png" type="Texture" id=2]
+[ext_resource path="res://src/UserInterface/MailUI.gd" type="Script" id=3]
+[ext_resource path="res://assets/fonts/kenney_title.tres" type="DynamicFont" id=4]
 
 [node name="MailUI" type="PanelContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 1 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -29,24 +32,31 @@ stretch_mode = 6
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer"]
 margin_left = 36.0
-margin_right = 231.0
+margin_right = 375.0
 margin_bottom = 64.0
 
 [node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
-margin_right = 195.0
+margin_right = 339.0
 margin_bottom = 30.0
-text = "Name"
+text = "Roger Space"
 
 [node name="Label2" type="Label" parent="VBoxContainer/HBoxContainer/VBoxContainer"]
 margin_top = 34.0
-margin_right = 195.0
+margin_right = 339.0
 margin_bottom = 64.0
-text = "email@email.com"
+text = "roger.space@softcorp.com"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+[node name="MailTitle" type="Label" parent="VBoxContainer"]
 margin_top = 68.0
 margin_right = 1358.0
-margin_bottom = 194.0
+margin_bottom = 140.0
+custom_fonts/font = ExtResource( 4 )
+text = "Welcome and first steps"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+margin_top = 144.0
+margin_right = 1358.0
+margin_bottom = 270.0
 text = "Title,
  a
 Hello abcaa

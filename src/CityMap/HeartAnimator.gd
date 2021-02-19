@@ -59,7 +59,7 @@ func _get_heartbeat_volume_db() -> int:
 			score += 1
 	if score == 0:
 		return -80
-	score *= score
-	var volume_db = Math.map(score, 1, 30, -20, -8)
+#	score *= score
+	var volume_db = Math.map(score, 1, 30, -30, -8)
 	volume_db = clamp(volume_db, -80, -8)
 	return volume_db

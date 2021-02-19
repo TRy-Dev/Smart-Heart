@@ -1,8 +1,26 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://src/UserInterface/UserInterface.gd" type="Script" id=1]
 [ext_resource path="res://src/UserInterface/MapUI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://src/UserInterface/StoryUI.tscn" type="PackedScene" id=3]
+
+[sub_resource type="Animation" id=1]
+resource_name = "_reset"
+length = 0.001
+
+[sub_resource type="Animation" id=3]
+resource_name = "show_story"
+length = 0.7
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Control/StoryUI:rect_position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 768, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.7 )
+}
 
 [node name="UserInterface" type="CanvasLayer"]
 script = ExtResource( 1 )
@@ -18,3 +36,8 @@ __meta__ = {
 [node name="MapUI" parent="Control" instance=ExtResource( 2 )]
 
 [node name="StoryUI" parent="Control" instance=ExtResource( 3 )]
+margin_bottom = -0.00012207
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/_reset = SubResource( 1 )
+anims/show_story = SubResource( 3 )

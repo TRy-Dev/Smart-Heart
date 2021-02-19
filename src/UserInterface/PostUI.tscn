@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://assets/themes/ambulance_ui.tres" type="Theme" id=1]
 [ext_resource path="res://assets/fonts/kenney_mini.tres" type="DynamicFont" id=2]
 [ext_resource path="res://assets/fonts/kenney_mini_small.tres" type="DynamicFont" id=3]
+[ext_resource path="res://src/UserInterface/PostUI.gd" type="Script" id=4]
 
 [sub_resource type="StyleBoxFlat" id=1]
 content_margin_left = 4.0
@@ -17,6 +18,7 @@ margin_bottom = 14.0
 rect_min_size = Vector2( 240, 0 )
 theme = ExtResource( 1 )
 custom_styles/panel = SubResource( 1 )
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

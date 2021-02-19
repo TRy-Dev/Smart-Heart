@@ -14,7 +14,7 @@ signal selected(amb)
 signal fuel_updated(fuel)
 signal position_changed(delta)
 
-const START_FUEL := 256.0
+const START_FUEL := 256.0 + 260.0 
 const SPEED := 42.0
 
 var _fuel := START_FUEL

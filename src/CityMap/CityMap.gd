@@ -41,9 +41,9 @@ var _day_idx = -1
 func initialize(ui) -> void:
 	_ui = ui
 	reset()
-	connect("heart_collected", ui, "_on_heart_collected")
-	connect("heart_expired", ui, "_on_heart_expired")
-	ui.connect("ambulance_ui_clicked", self, "_on_ambulance_ui_clicked")
+	connect("heart_collected", ui.map_ui, "_on_heart_collected")
+	connect("heart_expired", ui.map_ui, "_on_heart_expired")
+	ui.map_ui.connect("ambulance_ui_clicked", self, "_on_ambulance_ui_clicked")
 	connect("heart_created", heart_animator, "_on_heart_created")
 	connect("heart_collected", heart_animator, "_on_heart_collected")
 	connect("heart_expired", heart_animator, "_on_heart_expired")
