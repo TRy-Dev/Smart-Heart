@@ -43,7 +43,8 @@ func _on_gui_input(event):
 
 func _on_ambulance_selected(amb) -> void:
 #	print(amb)
-	print("Ambulance UI selected. TBI")
+#	print("Ambulance UI selected. TBI")
+	pass
 
 func _on_ambulance_fuel_updated(fuel) -> void:
 	fuel_bar.value = fuel

@@ -1,0 +1,244 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://assets/themes/ambulance_ui.tres" type="Theme" id=1]
+[ext_resource path="res://src/UserInterface/StartScene.gd" type="Script" id=2]
+[ext_resource path="res://assets/images/lock.png" type="Texture" id=3]
+[ext_resource path="res://assets/fonts/kenney_title.tres" type="DynamicFont" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "_reset"
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Fg:margin_right")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -1366, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Fg:color:r")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0.262745, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Fg:color:g")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0.133333, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Fg:color:b")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0.45098, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/4/type = "bezier"
+tracks/4/path = NodePath("Fg:color:a")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("CenterContainer/Logo:modulate:r")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/6/type = "bezier"
+tracks/6/path = NodePath("CenterContainer/Logo:modulate:g")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/7/type = "bezier"
+tracks/7/path = NodePath("CenterContainer/Logo:modulate:b")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/8/type = "bezier"
+tracks/8/path = NodePath("CenterContainer/Logo:modulate:a")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "load"
+length = 10.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("Fg:margin_right")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( -1366, -0.25, 0, 0.25, 0, -341.624, -0.25, 0, 0.25, 0, -341.624, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 2.6, 3.2, 4 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("Fg:color:r")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0.262745, -0.25, 0, 0.25, 0, 0.392157, -0.25, 0, 0.25, 0, 0.152941, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 4, 8, 10 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("Fg:color:g")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0.133333, -0.25, 0, 0.25, 0, 0.243137, -0.25, 0, 0.25, 0, 0.0509804, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 4, 8, 10 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("Fg:color:b")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0.45098, -0.25, 0, 0.25, 0, 0.619608, -0.25, 0, 0.25, 0, 0.301961, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 4, 8, 10 )
+}
+tracks/4/type = "method"
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 4 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "play_welcome_audio"
+} ]
+}
+tracks/5/type = "bezier"
+tracks/5/path = NodePath("CenterContainer/Logo:modulate:a")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 4, 8, 10 )
+}
+
+[node name="StartScene" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bg" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.152941, 0.0509804, 0.301961, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Fg" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = -1366.0
+color = Color( 0.262745, 0.133333, 0.45098, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/_reset = SubResource( 1 )
+anims/load = SubResource( 2 )
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Logo" type="Control" parent="CenterContainer"]
+modulate = Color( 1, 1, 1, 0 )
+margin_left = 433.0
+margin_top = 234.0
+margin_right = 933.0
+margin_bottom = 534.0
+rect_min_size = Vector2( 500, 300 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/Logo"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_constants/separation = 20
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="CenterContainer/Logo/HBoxContainer"]
+margin_left = 104.0
+margin_right = 232.0
+margin_bottom = 300.0
+rect_min_size = Vector2( 128, 128 )
+texture = ExtResource( 3 )
+stretch_mode = 6
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer/Logo/HBoxContainer"]
+margin_left = 252.0
+margin_right = 396.0
+margin_bottom = 300.0
+alignment = 1
+
+[node name="Label" type="Label" parent="CenterContainer/Logo/HBoxContainer/VBoxContainer"]
+margin_top = 76.0
+margin_right = 144.0
+margin_bottom = 223.0
+custom_fonts/font = ExtResource( 4 )
+text = "Safe
+OS"

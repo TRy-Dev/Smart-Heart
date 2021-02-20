@@ -93,7 +93,7 @@ _global_script_class_icons={
 [application]
 
 config/name="GodotWildJam30"
-run/main_scene="res://src/Main.tscn"
+run/main_scene="res://src/UserInterface/StartScene.tscn"
 config/icon="res://icon.png"
 
 [audio]
@@ -118,6 +118,7 @@ PhysicsPrediction="*res://src/Modules/Physics/PhysicsPrediction.gd"
 DialogueController="*res://src/Modules/Dialogue/DialogueController.gd"
 GlobalConstants="*res://src/GlobalConstants.gd"
 Colors="*res://src/Colors.gd"
+Crt="*res://src/UserInterface/CRT.tscn"
 
 [debug]
 
@@ -195,4 +196,4 @@ quality/2d/use_nvidia_rect_flicker_workaround=true
 quality/2d/use_pixel_snap=true
 vram_compression/import_etc=true
 vram_compression/import_etc2=false
-environment/default_clear_color=Color( 0.0588235, 0.0588235, 0.0588235, 1 )
+environment/default_clear_color=Color( 0.152941, 0.0509804, 0.301961, 1 )

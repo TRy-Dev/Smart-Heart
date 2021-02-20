@@ -5,6 +5,8 @@ func enter(previous: State) -> void:
 	owner.unselect()
 
 func update(input: Dictionary) -> void:
+	if owner.is_stopped:
+		return
 	if owner.is_on_home_position():
 		emit_signal("finished", "InGarage")
 		return

@@ -1,8 +1,93 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://src/UserInterface/StoryUI.gd" type="Script" id=1]
 [ext_resource path="res://src/UserInterface/MailUI.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/themes/ambulance_ui.tres" type="Theme" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "_reset"
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("VBoxContainer/CenterContainer/StartButton:modulate:r")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("VBoxContainer/CenterContainer/StartButton:modulate:g")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("VBoxContainer/CenterContainer/StartButton:modulate:b")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/3/type = "bezier"
+tracks/3/path = NodePath("VBoxContainer/CenterContainer/StartButton:modulate:a")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "show_button"
+length = 4.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("VBoxContainer/CenterContainer/StartButton:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 4 )
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "_reset"
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("VBoxContainer/TabContainer:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "show"
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("VBoxContainer/TabContainer:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 1 )
+}
 
 [node name="StoryUI" type="PanelContainer"]
 anchor_right = 1.0
@@ -18,37 +103,45 @@ margin_left = 4.0
 margin_top = 4.0
 margin_right = 1362.0
 margin_bottom = 764.0
+custom_constants/separation = 20
 
 [node name="PADDING" type="Control" parent="VBoxContainer"]
 margin_right = 1358.0
-margin_bottom = 80.0
-rect_min_size = Vector2( 0, 80 )
+margin_bottom = 10.0
+rect_min_size = Vector2( 0, 10 )
 
-[node name="StartButton" type="Button" parent="VBoxContainer"]
-margin_top = 84.0
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+margin_top = 30.0
 margin_right = 1358.0
-margin_bottom = 156.0
+margin_bottom = 112.0
+
+[node name="StartButton" type="Button" parent="VBoxContainer/CenterContainer"]
+margin_left = 525.0
+margin_right = 833.0
+margin_bottom = 82.0
 focus_mode = 0
 enabled_focus_mode = 0
-text = "START DAY X"
+text = "START"
 
 [node name="TabContainer" type="TabContainer" parent="VBoxContainer"]
-margin_top = 160.0
+margin_top = 132.0
 margin_right = 1358.0
-margin_bottom = 200.0
+margin_bottom = 732.0
+rect_min_size = Vector2( 0, 600 )
 
 [node name="news it" type="Control" parent="VBoxContainer/TabContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 40.0
+margin_top = 54.0
 
 [node name="PostContainer" type="VBoxContainer" parent="VBoxContainer/TabContainer/news it"]
 anchor_left = 0.5
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -300.0
-margin_right = 300.0
-alignment = 1
+margin_left = -350.0
+margin_right = 350.0
+margin_bottom = 2.0
+custom_constants/separation = 4
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -57,36 +150,31 @@ __meta__ = {
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_top = 40.0
+margin_top = 54.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TabContainer/my mail"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_bottom = -13.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer/TabContainer/my mail/HBoxContainer"]
-margin_left = 75.0
-margin_right = 275.0
-margin_bottom = 202.0
-rect_min_size = Vector2( 200, 40 )
-color = Color( 1, 1, 1, 0.0392157 )
-
-[node name="ColorRect2" type="ColorRect" parent="VBoxContainer/TabContainer/my mail/HBoxContainer"]
-margin_left = 279.0
-margin_right = 479.0
-margin_bottom = 202.0
-rect_min_size = Vector2( 200, 40 )
-color = Color( 1, 1, 1, 0.0392157 )
-
 [node name="MailUI" parent="VBoxContainer/TabContainer/my mail/HBoxContainer" instance=ExtResource( 2 )]
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_left = 483.0
-margin_right = 1283.0
-margin_bottom = 202.0
-rect_min_size = Vector2( 800, 0 )
-[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
+margin_left = 329.0
+margin_right = 1029.0
+margin_bottom = 533.0
+rect_min_size = Vector2( 700, 0 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/_reset = SubResource( 1 )
+anims/show_button = SubResource( 2 )
+
+[node name="TabAnim" type="AnimationPlayer" parent="."]
+anims/_reset = SubResource( 3 )
+anims/show = SubResource( 4 )
+[connection signal="pressed" from="VBoxContainer/CenterContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="tab_changed" from="VBoxContainer/TabContainer" to="." method="_on_TabContainer_tab_changed"]

@@ -1,0 +1,87 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://src/Modules/Rendering/Shaders/crt.shader" type="Shader" id=1]
+[ext_resource path="res://src/UserInterface/CRT.gd" type="Script" id=2]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 1 )
+shader_param/screen_size = Vector2( 1366, 768 )
+shader_param/show_curvature = true
+shader_param/curvature_x_amount = 9.0
+shader_param/curvature_y_amount = 7.0
+shader_param/corner_color = Color( 0.152941, 0.0509804, 0.301961, 1 )
+shader_param/show_vignette = true
+shader_param/vignette_opacity = 0.3
+shader_param/show_horizontal_scan_lines = true
+shader_param/horizontal_scan_lines_amount = 180.0
+shader_param/horizontal_scan_lines_opacity = 0.2
+shader_param/show_vertical_scan_lines = false
+shader_param/vertical_scan_lines_amount = 320.0
+shader_param/vertical_scan_lines_opacity = 0.2
+shader_param/boost = 1.2
+shader_param/aberration_amount = 4.0
+
+[sub_resource type="Animation" id=2]
+resource_name = "_reset"
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("ColorRect:material:shader_param/horizontal_scan_lines_opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0.1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("ColorRect:material:shader_param/aberration_amount")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "glitch"
+length = 0.4
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("ColorRect:material:shader_param/horizontal_scan_lines_opacity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0.1, -0.25, 0, 0.25, 0, 0.2, -0.25, 0, 0.25, 0, 0.1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.2, 0.4 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("ColorRect:material:shader_param/aberration_amount")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 4, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 0.2, 0.4 )
+}
+
+[node name="CRT" type="CanvasLayer"]
+layer = 100
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource( 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/_reset = SubResource( 2 )
+anims/glitch = SubResource( 3 )

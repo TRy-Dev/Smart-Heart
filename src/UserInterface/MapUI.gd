@@ -3,8 +3,8 @@ extends PanelContainer
 signal ambulance_ui_clicked(index)
 
 onready var ambulance_container = $VBoxContainer
-onready var hearts_picked = $VBoxContainer/HeartsContainer/HeartsPicked
-onready var hearts_expired = $VBoxContainer/HeartsContainer/HeartsExpired
+onready var hearts_picked = $VBoxContainer/HeartsContainer/HeartsPicked/HeartsPicked
+onready var hearts_expired = $VBoxContainer/HeartsContainer/HeartsExpired/HeartsExpired
 
 var amb_ui_prefab = preload("res://src/UserInterface/AmbulanceUI.tscn")
 var heart_ui_prefab = preload("res://src/UserInterface/HeartUI.tscn")

@@ -104,7 +104,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.2, 0.4 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
-"values": [ Color( 0.784314, 0.196078, 0.156863, 0 ), Color( 0.901961, 0.282353, 0.180392, 0.0627451 ), Color( 0.784314, 0.196078, 0.156863, 0 ) ]
+"values": [ Color( 0.870588, 0.0862745, 0.0862745, 0 ), Color( 0.870588, 0.0862745, 0.0862745, 0.0392157 ), Color( 0.870588, 0.0862745, 0.0862745, 0 ) ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -172,13 +172,13 @@ __meta__ = {
 }
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 128
+layer = 121
 
 [node name="Fade" type="ColorRect" parent="CanvasLayer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-color = Color( 0, 0, 0, 1 )
+color = Color( 0, 0, 0, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -187,7 +187,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-color = Color( 0.784314, 0.196078, 0.156863, 0 )
+color = Color( 0.870588, 0.0862745, 0.0862745, 0.0313725 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

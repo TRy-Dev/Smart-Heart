@@ -17,6 +17,12 @@ func play(anim_player :AnimationPlayer, name :String, reset := true, backwards :
 func queue(anim_player :AnimationPlayer, name :String, reset := true, backwards := false) -> void:
 	if anim_player.has_animation(name):
 		if backwards:
+#			if not anim_player.is_playing():
+#				print("HEY! Trying to queue, but there's no animation in queue!")
+#				return
+#			while anim_player.is_playing():
+#				yield(anim_player, "animation_finished")
+#			anim_player.play(name)
 			print("HEY! Can't queue animation backwards. Implement it using yields instead of anim_player.queue()")
 			return
 		if reset:

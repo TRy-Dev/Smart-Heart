@@ -19,9 +19,11 @@ func extract_text(name: String) -> String:
 	var dialogue = _get_current_dialogue()
 	var text = ""
 	for line in dialogue.lines:
-		text += line
+		if line == "n\n":
+			text += "\n"
+		else:
+			text += "    " + line
 	return text
-	
 
 func select_option(index: int) -> Dictionary:
 	story.choose_choice_index(index)

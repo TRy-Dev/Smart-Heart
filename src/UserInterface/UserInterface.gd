@@ -11,7 +11,11 @@ func init_gameplay(ambulances) -> void:
 	map_ui.init_gameplay(ambulances)
 
 func show_story(current_day):
-	AnimationController.play(anim_player, "show_story")
+	if current_day == 0:
+		AnimationController.play(anim_player, "show_story", true, true)
+		anim_player.stop()
+	else:
+		AnimationController.play(anim_player, "show_story")
 	story_ui.show_story(current_day)
 #	map_ui.visible = false
 

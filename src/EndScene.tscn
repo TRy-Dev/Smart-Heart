@@ -1,0 +1,200 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://src/EndScene.gd" type="Script" id=1]
+[ext_resource path="res://assets/images/heart_ui.png" type="Texture" id=2]
+[ext_resource path="res://assets/themes/ambulance_ui.tres" type="Theme" id=3]
+[ext_resource path="res://assets/fonts/kenney_title.tres" type="DynamicFont" id=4]
+[ext_resource path="res://src/UserInterface/PostUI.tscn" type="PackedScene" id=5]
+
+[sub_resource type="Animation" id=1]
+resource_name = "_reset"
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("HBoxContainer/PostContainer:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("HBoxContainer/Hearts/Collected:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+tracks/2/type = "bezier"
+tracks/2/path = NodePath("HBoxContainer/Hearts/Expired:modulate:a")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0 )
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "show_hearts"
+length = 4.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("HBoxContainer/Hearts/Collected:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 3 )
+}
+tracks/1/type = "bezier"
+tracks/1/path = NodePath("HBoxContainer/Hearts/Expired:modulate:a")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 1, 4 )
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "show_post"
+length = 4.0
+tracks/0/type = "bezier"
+tracks/0/path = NodePath("HBoxContainer/PostContainer:modulate:a")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"points": PoolRealArray( 0, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0 ),
+"times": PoolRealArray( 0, 4 )
+}
+
+[node name="EndScene" type="PanelContainer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme = ExtResource( 3 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+margin_left = 4.0
+margin_top = 4.0
+margin_right = 1362.0
+margin_bottom = 764.0
+custom_constants/separation = 200
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Hearts" type="VBoxContainer" parent="HBoxContainer"]
+margin_left = 322.0
+margin_right = 536.0
+margin_bottom = 760.0
+rect_min_size = Vector2( 200, 0 )
+alignment = 1
+
+[node name="Collected" type="HBoxContainer" parent="HBoxContainer/Hearts"]
+margin_top = 306.0
+margin_right = 214.0
+margin_bottom = 378.0
+custom_constants/separation = 30
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Hearts/Collected"]
+modulate = Color( 0.870588, 0.0862745, 0.0862745, 1 )
+margin_right = 64.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 2 )
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="HBoxContainer/Hearts/Collected"]
+margin_left = 94.0
+margin_right = 214.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 120, 0 )
+custom_fonts/font = ExtResource( 4 )
+text = "78"
+valign = 1
+
+[node name="Expired" type="HBoxContainer" parent="HBoxContainer/Hearts"]
+margin_top = 382.0
+margin_right = 214.0
+margin_bottom = 454.0
+custom_constants/separation = 30
+alignment = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/Hearts/Expired"]
+modulate = Color( 0.054902, 0.168627, 0.0980392, 1 )
+margin_right = 64.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 64, 64 )
+texture = ExtResource( 2 )
+stretch_mode = 6
+
+[node name="Label" type="Label" parent="HBoxContainer/Hearts/Expired"]
+margin_left = 94.0
+margin_right = 214.0
+margin_bottom = 72.0
+rect_min_size = Vector2( 120, 0 )
+custom_fonts/font = ExtResource( 4 )
+text = "78"
+valign = 1
+
+[node name="PostContainer" type="Control" parent="HBoxContainer"]
+margin_left = 736.0
+margin_right = 1036.0
+margin_bottom = 760.0
+rect_min_size = Vector2( 300, 0 )
+
+[node name="PostUI" parent="HBoxContainer/PostContainer" instance=ExtResource( 5 )]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -180.0
+margin_top = -51.0
+margin_right = 328.0
+margin_bottom = 51.0
+
+[node name="HBoxContainer" parent="HBoxContainer/PostContainer/PostUI" index="0"]
+margin_right = 504.0
+margin_bottom = 98.0
+rect_min_size = Vector2( 500, 0 )
+
+[node name="TextureRect" parent="HBoxContainer/PostContainer/PostUI/HBoxContainer" index="0"]
+margin_bottom = 94.0
+
+[node name="VBoxContainer" parent="HBoxContainer/PostContainer/PostUI/HBoxContainer" index="1"]
+margin_right = 468.0
+margin_bottom = 94.0
+rect_min_size = Vector2( 400, 0 )
+
+[node name="RichTextLabel" parent="HBoxContainer/PostContainer/PostUI/HBoxContainer/VBoxContainer" index="1"]
+margin_right = 400.0
+margin_bottom = 94.0
+text = "post contents
+post contents
+post contents"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/_reset = SubResource( 1 )
+anims/show_hearts = SubResource( 2 )
+anims/show_post = SubResource( 3 )
+[connection signal="gui_input" from="HBoxContainer/PostContainer/PostUI" to="." method="_on_PostUI_gui_input"]
+[connection signal="mouse_entered" from="HBoxContainer/PostContainer/PostUI" to="." method="_on_PostUI_mouse_entered"]
+[connection signal="mouse_exited" from="HBoxContainer/PostContainer/PostUI" to="." method="_on_PostUI_mouse_exited"]
+
+[editable path="HBoxContainer/PostContainer/PostUI"]

@@ -14,7 +14,7 @@ signal selected(amb)
 signal fuel_updated(fuel)
 signal position_changed(delta)
 
-const START_FUEL := 256.0 + 260.0 
+const START_FUEL := 256.0 + 130.0 
 const SPEED := 42.0
 
 var _fuel := START_FUEL
@@ -23,6 +23,7 @@ var _home_position := Vector2()
 var _city_map = null
 
 var is_selected = false
+var is_stopped = false setget set_is_stopped
 
 var ambulance_name = "AMB"
 
@@ -39,6 +40,7 @@ func initialize(pos, city_map, idx):
 	fsm.initialize()
 	set_fuel(START_FUEL)
 	play_anim("_reset")
+	set_is_stopped(false)
 
 func update_amb(delta) -> void:
 	fsm.update({
@@ -149,6 +151,9 @@ func unselect() -> void:
 
 func play_anim(name):
 	AnimationController.play(anim_player, name)
+
+func set_is_stopped(val):
+	is_stopped = val
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
 	if event is InputEventMouseButton:

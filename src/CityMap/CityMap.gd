@@ -4,6 +4,7 @@ signal heart_collected(h)
 signal heart_expired(h)
 signal heart_created(h)
 
+onready var traffic = $Traffic
 onready var buildings = $Buildings
 onready var roads = $Roads
 onready var grid_navigation = $GridNavigation
@@ -17,9 +18,9 @@ onready var extra_amb_slots = $ExtraAmbulance
 onready var path = $Path
 onready var pawn_contaner = $AmbContainer #$BuildingsNice
 
-
 var ambulance_prefab = preload("res://src/CityMap/Ambulance.tscn")
 var heart_prefab = preload("res://src/CityMap/Pickups/Heart.tscn")
+var traffic_prefab = preload("res://src/CityMap/Pickups/Traffic.tscn")
 
 var selected_ambulance = null
 
@@ -27,13 +28,13 @@ var _ambulances = []
 
 # world_pos -> heart
 var _hearts = {}
+var _traffic = []
 
 var heart_world_positions = []
 
 var hearts_collected = 0
 var hearts_expired = 0
 
-#const BPM = 60
 
 var _ui = null
 var _day_idx = -1
@@ -47,10 +48,11 @@ func initialize(ui) -> void:
 	connect("heart_created", heart_animator, "_on_heart_created")
 	connect("heart_collected", heart_animator, "_on_heart_collected")
 	connect("heart_expired", heart_animator, "_on_heart_expired")
-	buildings.visible = true
+	buildings.visible = false
 	ambulance_slots.visible = true
 	no_road.visible = false
 	extra_amb_slots.visible = false
+	traffic.visible = false
 
 func start_day(day_idx) -> void:
 	reset()
@@ -60,7 +62,7 @@ func start_day(day_idx) -> void:
 	_init_ambulances(day_idx)
 	_ui.init_gameplay(_ambulances)
 	buildings_nice.visible = true
-	buildings.visible = true
+#	buildings.visible = true
 	ambulance_slots.visible = true
 	heart_spawn_timer.wait_time = GlobalConstants.day_data(day_idx).heart_spawn_rate
 	yield(get_tree().create_timer(GlobalConstants.day_data(day_idx).start_delay), "timeout")
@@ -86,6 +88,9 @@ func reset():
 	buildings.visible = false
 	ambulance_slots.visible = false
 	heart_animator.stop()
+	for t in _traffic:
+		t.queue_free()
+	_traffic = []
 
 func update_current_path():
 	var points = PoolVector2Array()
@@ -172,6 +177,12 @@ func _init_city(day_idx: int) -> void:
 	var road_cells = roads_dict.keys()
 	roads.generate(road_cells)
 	grid_navigation.initialize(roads)
+	if GlobalConstants.day_data(day_idx).traffic:
+		for t_pos in traffic.get_used_cells():
+			var new_t = traffic_prefab.instance()
+			pawn_contaner.add_child(new_t)
+			_traffic.append(new_t)
+			new_t.initialize(get_road_center_position(t_pos), day_idx)
 
 func _get_random_free_position():
 	var pos = Rng.rand_array_element(heart_world_positions)

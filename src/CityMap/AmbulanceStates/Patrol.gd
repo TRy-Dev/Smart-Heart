@@ -11,6 +11,8 @@ func exit(next: State) -> void:
 	audio.stop()
 
 func update(input: Dictionary) -> void:
+	if owner.is_stopped:
+		return
 	var dir = owner.get_current_move_direction()
 	if dir == Vector2.ZERO or owner.get_fuel() <= 0.0:
 		emit_signal("finished", "BackToGarage")

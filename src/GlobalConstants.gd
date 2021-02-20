@@ -12,47 +12,53 @@ var _amb_names = [
 	["Ochoa", "Ohsumi"],
 	["Karl Landsteiner"],
 ]
-
 var _DAY_DATA = {
-	0: {
+	0: { # Demo
+		"bpm": 60,
+		"heart_alive_time": 16.0,
+		"heart_spawn_rate": 3.5,
+		"extra_amb": false,
+		"start_delay": 5.0,
+		"traffic": false,
+	},
+	1: { # Real
+		"bpm": 80,
+		"heart_alive_time": 12.0,
+		"heart_spawn_rate": 3.0,
+		"extra_amb": false,
+		"start_delay": 2.0,
+		"traffic": false,
+	},
+	2: { # More customers
 		"bpm": 80,
 		"heart_alive_time": 12.0,
 		"heart_spawn_rate": 2.5,
 		"extra_amb": false,
-		"start_delay": 5.0,
+		"start_delay": 2.0,
+		"traffic": false,
 	},
-	1: {
-		"bpm": 80,
-		"heart_alive_time": 12.0,
-		"heart_spawn_rate": 2.0,
-		"extra_amb": false,
-		"start_delay": 3.0,
+	3: { # Elderly
+		"bpm": 100,
+		"heart_alive_time": 10.0,
+		"heart_spawn_rate": 2.5,
+		"extra_amb": true,
+		"start_delay": 2.0,
+		"traffic": false,
 	},
-	2: {
-		"bpm": 80,
-		"heart_alive_time": 9.0,
-		"heart_spawn_rate": 2.0,
-		"extra_amb": false,
-		"start_delay": 1.0,
-	},
-	3: {
-		"bpm": 80,
-		"heart_alive_time": 9.0,
+	4: { # Game Day
+		"bpm": 120,
+		"heart_alive_time": 10.0,
 		"heart_spawn_rate": 2.0,
 		"extra_amb": true,
-		"start_delay": 1.0,
-	},
-#	4: {
-#		"bpm": 80,
-#		"heart_alive_time": 9.0,
-#		"heart_spawn_rate": 2.0,
-#		"extra_amb": true,
-#		"start_delay": 1.0,
-#		"traffic": true,
-#	}
+		"start_delay": 2.0,
+		"traffic": true,
+	}
 }
 
 var _amb_names_this_session = []
+
+var total_hearts_collected = 0
+var total_hearts_expired = 0
 
 func _ready():
 	# Generate amb names
@@ -72,3 +78,6 @@ func day_data(day_idx):
 		print("Could not find data for day_idx %s. Returning default day_idx %s" %[day_idx, DEFAULT_DAY])
 		return _DAY_DATA[DEFAULT_DAY]
 	return _DAY_DATA[day_idx]
+
+func has_next_day(current_day):
+	return _DAY_DATA.has(current_day + 1)
