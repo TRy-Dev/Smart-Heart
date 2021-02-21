@@ -7,6 +7,7 @@ onready var name_label = $VBoxContainer/Container/Info/Name
 onready var state_label = $VBoxContainer/Container/Info/State
 onready var image = $VBoxContainer/Container/Image
 onready var index_label = $VBoxContainer/Container/Index
+onready var anim_player = $AnimationPlayer
 
 var index = -1
 
@@ -24,6 +25,7 @@ func initialize(amb, idx) -> void:
 	amb.connect("fuel_updated", self, "_on_ambulance_fuel_updated")
 	amb.connect("position_changed", self, "_on_ambulance_position_changed")
 	amb.fsm.connect("state_changed", self, "_on_ambulance_state_changed")
+	amb.connect("failed_to_select", self, "_on_ambulance_failed_to_select")
 	fuel_bar.max_value = amb.START_FUEL
 	state_label.text = amb.fsm.current_state.name
 	name_label.text = amb.ambulance_name
@@ -55,3 +57,6 @@ func _on_ambulance_position_changed(delta) -> void:
 
 func _on_ambulance_state_changed(previous, current) -> void:
 	state_label.text = current.name
+
+func _on_ambulance_failed_to_select(amb):
+	AnimationController.play(anim_player, "flash_state")

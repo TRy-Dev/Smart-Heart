@@ -12,7 +12,7 @@ script = ExtResource( 2 )
 [node name="CityMap" parent="." instance=ExtResource( 1 )]
 
 [node name="CameraController" parent="." instance=ExtResource( 3 )]
-position = Vector2( 92, 25.568 )
+position = Vector2( 84, 25.568 )
 zoom = Vector2( 0.33, 0.33 )
 
 [node name="UserInterface" parent="." instance=ExtResource( 4 )]

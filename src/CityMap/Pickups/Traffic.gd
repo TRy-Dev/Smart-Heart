@@ -6,7 +6,7 @@ onready var cooldown_timer = $CooldownTimer
 
 var ambulances = []
 
-const STOP_PROBABILITY = 0.15
+const STOP_PROBABILITY = 0.25
 const COOLDOWN_MIN_TIME = 9.0
 const COOLDOWN_MAX_TIME = 12.0
 
@@ -15,6 +15,8 @@ var is_stopping = false
 func _ready():
 	cooldown_timer.wait_time = Rng.randf(COOLDOWN_MIN_TIME, COOLDOWN_MAX_TIME)
 	cooldown_timer.start()
+	AnimationController.reset(anim_player)
+	AnimationController.reset(light_anim)
 
 func _on_area_entered(area):
 	ambulances.append(area.owner)

@@ -49,10 +49,11 @@ func initialize(ui) -> void:
 	connect("heart_collected", heart_animator, "_on_heart_collected")
 	connect("heart_expired", heart_animator, "_on_heart_expired")
 	buildings.visible = false
-	ambulance_slots.visible = true
+	ambulance_slots.visible = false
 	no_road.visible = false
 	extra_amb_slots.visible = false
 	traffic.visible = false
+	$Bg.visible = true
 
 func start_day(day_idx) -> void:
 	reset()
@@ -235,7 +236,7 @@ func _select_ambulance_by_id(idx):
 	if _ambulances[idx].fsm.current_state.name != "BackToGarage":
 		_ambulances[idx].select()
 	else:
-		AudioController.sfx.play("ui_fail", -8)
+		_ambulances[idx].fail_ui_select()
 
 func _on_HeartSpawnTimer_timeout():
 	spawn_random_heart()

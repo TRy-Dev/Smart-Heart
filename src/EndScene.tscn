@@ -106,6 +106,7 @@ rect_min_size = Vector2( 200, 0 )
 alignment = 1
 
 [node name="Collected" type="HBoxContainer" parent="HBoxContainer/Hearts"]
+modulate = Color( 1, 1, 1, 0 )
 margin_top = 306.0
 margin_right = 214.0
 margin_bottom = 378.0
@@ -130,6 +131,7 @@ text = "78"
 valign = 1
 
 [node name="Expired" type="HBoxContainer" parent="HBoxContainer/Hearts"]
+modulate = Color( 1, 1, 1, 0 )
 margin_top = 382.0
 margin_right = 214.0
 margin_bottom = 454.0
@@ -154,6 +156,7 @@ text = "78"
 valign = 1
 
 [node name="PostContainer" type="Control" parent="HBoxContainer"]
+modulate = Color( 1, 1, 1, 0 )
 margin_left = 736.0
 margin_right = 1036.0
 margin_bottom = 760.0
@@ -168,6 +171,7 @@ margin_left = -180.0
 margin_top = -51.0
 margin_right = 328.0
 margin_bottom = 51.0
+rect_min_size = Vector2( 500, 0 )
 
 [node name="HBoxContainer" parent="HBoxContainer/PostContainer/PostUI" index="0"]
 margin_right = 504.0

@@ -187,7 +187,7 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-color = Color( 0.870588, 0.0862745, 0.0862745, 0.0313725 )
+color = Color( 0.784314, 0.196078, 0.156863, 0 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

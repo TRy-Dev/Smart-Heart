@@ -11,7 +11,7 @@ onready var tab_container = $VBoxContainer/TabContainer
 onready var mail_ui = mail_tab.get_node("HBoxContainer/MailUI")
 onready var post_container = news_tab.get_node("PostContainer")
 
-onready var anim_player = $AnimationPlayer
+onready var button_anim = $ButtonAnim
 onready var tab_anim = $TabAnim
 
 var post_prefab = preload("res://src/UserInterface/PostUI.tscn")
@@ -26,7 +26,7 @@ func show_story(current_day):
 	start_button.disabled = true
 	tab_container.current_tab = 0
 	mail_tab.name = _get_tab_name_string(">1< my mail")
-	AnimationController.reset(anim_player)
+	AnimationController.reset(button_anim)
 	AnimationController.play(tab_anim, "show")
 	call_deferred("_load_story_data", current_day)
 
@@ -56,7 +56,7 @@ func _on_TabContainer_tab_changed(tab):
 	if tab == 1 and start_button.disabled:
 		mail_tab.name = _get_tab_name_string("  my mail  ")
 		start_button.disabled = false
-		AnimationController.play(anim_player, "show_button")
+		AnimationController.play(button_anim, "show_button")
 
 const TAB_WIDTH_CHARS = 24
 func _get_tab_name_string(text) -> String:

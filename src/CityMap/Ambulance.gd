@@ -9,12 +9,14 @@ onready var selected_highlight = $Area2D/SelectedHighlight
 
 onready var name_label = $Area2D/UI/Control/Name
 onready var fuel_bar = $Area2D/UI/Control/FuelBar
+onready var patrol_anim = $PatrolAnim
 
 signal selected(amb)
 signal fuel_updated(fuel)
 signal position_changed(delta)
+signal failed_to_select(amb)
 
-const START_FUEL := 256.0 + 130.0 
+const START_FUEL := 256.0 + 70.0
 const SPEED := 42.0
 
 var _fuel := START_FUEL
@@ -41,6 +43,7 @@ func initialize(pos, city_map, idx):
 	set_fuel(START_FUEL)
 	play_anim("_reset")
 	set_is_stopped(false)
+	AnimationController.reset(patrol_anim)
 
 func update_amb(delta) -> void:
 	fsm.update({
@@ -153,6 +156,8 @@ func play_anim(name):
 	AnimationController.play(anim_player, name)
 
 func set_is_stopped(val):
+	if not is_stopped and val:
+		AudioController.sfx.play("car_honk")
 	is_stopped = val
 
 func _on_Area2D_input_event(viewport, event, shape_idx):
@@ -161,4 +166,9 @@ func _on_Area2D_input_event(viewport, event, shape_idx):
 			if not fsm.current_state.name == "BackToGarage":
 				select()
 			else:
-				AudioController.sfx.play("ui_fail", -8)
+				fail_ui_select()
+
+func fail_ui_select():
+	AudioController.sfx.play("ui_fail", -8)
+	emit_signal("failed_to_select", self)
+	AnimationController.play(patrol_anim, "show")

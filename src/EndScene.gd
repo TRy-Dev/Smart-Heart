@@ -11,12 +11,12 @@ var post_title = "SoftCorp is hiring!"
 var post_text = "Join Smart Heart team and start #Saving #Lives #Today!"
 
 func _ready():
+	AnimationController.reset(anim_player)
+	Courtain.play("fade_out")
 	post_ui.modulate.a = 0.5
 	post_ui.initialize(post_title, post_text)
 	collected_label.text = str(GlobalConstants.total_hearts_collected)
 	expired_label.text = str(GlobalConstants.total_hearts_expired)
-	Courtain.play("fade_out")
-	AnimationController.reset(anim_player)
 	yield(Courtain.anim_player, "animation_finished")
 	AnimationController.play(anim_player, "show_hearts")
 	yield(anim_player, "animation_finished")

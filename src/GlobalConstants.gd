@@ -23,7 +23,7 @@ var _DAY_DATA = {
 	},
 	1: { # Real
 		"bpm": 80,
-		"heart_alive_time": 12.0,
+		"heart_alive_time": 11.0,
 		"heart_spawn_rate": 3.0,
 		"extra_amb": false,
 		"start_delay": 2.0,
@@ -31,7 +31,7 @@ var _DAY_DATA = {
 	},
 	2: { # More customers
 		"bpm": 80,
-		"heart_alive_time": 12.0,
+		"heart_alive_time": 11.0,
 		"heart_spawn_rate": 2.5,
 		"extra_amb": false,
 		"start_delay": 2.0,
@@ -39,15 +39,15 @@ var _DAY_DATA = {
 	},
 	3: { # Elderly
 		"bpm": 100,
-		"heart_alive_time": 10.0,
-		"heart_spawn_rate": 2.5,
+		"heart_alive_time": 9.0,
+		"heart_spawn_rate": 2.25,
 		"extra_amb": true,
 		"start_delay": 2.0,
 		"traffic": false,
 	},
 	4: { # Game Day
 		"bpm": 120,
-		"heart_alive_time": 10.0,
+		"heart_alive_time": 8.5,
 		"heart_spawn_rate": 2.0,
 		"extra_amb": true,
 		"start_delay": 2.0,
@@ -62,8 +62,7 @@ var total_hearts_expired = 0
 
 func _ready():
 	# Generate amb names
-	for i in range(len(_amb_names)):
-		_amb_names_this_session.append(Rng.rand_array_element(_amb_names[i]))
+	_generate_random_amb_names()
 
 func get_amb_name_by_index(idx):
 	if idx < 0:
@@ -81,3 +80,12 @@ func day_data(day_idx):
 
 func has_next_day(current_day):
 	return _DAY_DATA.has(current_day + 1)
+
+func reset_game_state():
+	total_hearts_collected = 0
+	total_hearts_expired = 0
+	_generate_random_amb_names()
+
+func _generate_random_amb_names():
+	for i in range(len(_amb_names)):
+		_amb_names_this_session.append(Rng.rand_array_element(_amb_names[i]))
