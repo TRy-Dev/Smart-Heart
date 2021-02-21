@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/squash.wav-70f21cd3bcb044113e96b54933828440.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/_unordered/squash.wav"
+dest_files=[ "res://.import/squash.wav-70f21cd3bcb044113e96b54933828440.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

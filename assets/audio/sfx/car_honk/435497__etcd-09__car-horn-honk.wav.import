@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/435497__etcd-09__car-horn-honk.wav-459f72b59639f2cacb1bde4c45cc5520.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/car_honk/435497__etcd-09__car-horn-honk.wav"
+dest_files=[ "res://.import/435497__etcd-09__car-horn-honk.wav-459f72b59639f2cacb1bde4c45cc5520.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

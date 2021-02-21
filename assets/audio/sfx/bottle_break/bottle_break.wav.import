@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/bottle_break.wav-17f7f80fde8cac5a347ff03d3bb9e802.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/bottle_break/bottle_break.wav"
+dest_files=[ "res://.import/bottle_break.wav-17f7f80fde8cac5a347ff03d3bb9e802.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/413749__inspectorj__ui-confirmation-alert-d1.wav-e21a4943499c8f9a4251ba54a181fadc.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/ui_welcome/413749__inspectorj__ui-confirmation-alert-d1.wav"
+dest_files=[ "res://.import/413749__inspectorj__ui-confirmation-alert-d1.wav-e21a4943499c8f9a4251ba54a181fadc.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

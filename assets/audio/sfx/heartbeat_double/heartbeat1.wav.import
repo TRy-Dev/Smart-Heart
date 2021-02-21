@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/heartbeat1.wav-e0a6213d2f32b7ed597ba994a400bcfd.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/heartbeat_double/heartbeat1.wav"
+dest_files=[ "res://.import/heartbeat1.wav-e0a6213d2f32b7ed597ba994a400bcfd.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

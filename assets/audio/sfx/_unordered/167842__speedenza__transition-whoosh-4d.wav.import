@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/167842__speedenza__transition-whoosh-4d.wav-9c6761dc028f788937204ee36a2b4407.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/_unordered/167842__speedenza__transition-whoosh-4d.wav"
+dest_files=[ "res://.import/167842__speedenza__transition-whoosh-4d.wav-9c6761dc028f788937204ee36a2b4407.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

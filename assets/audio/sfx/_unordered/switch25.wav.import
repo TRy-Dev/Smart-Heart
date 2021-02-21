@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/switch25.wav-0c40fad1a97537802e634be8e11e7323.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/_unordered/switch25.wav"
+dest_files=[ "res://.import/switch25.wav-0c40fad1a97537802e634be8e11e7323.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

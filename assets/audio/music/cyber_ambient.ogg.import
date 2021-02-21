@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/cyber_ambient.ogg-dcc00c49360a5aadb9971d495d786b26.oggstr"
+
+[deps]
+
+source_file="res://assets/audio/music/cyber_ambient.ogg"
+dest_files=[ "res://.import/cyber_ambient.ogg-dcc00c49360a5aadb9971d495d786b26.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

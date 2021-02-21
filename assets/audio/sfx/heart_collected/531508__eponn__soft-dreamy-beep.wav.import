@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/531508__eponn__soft-dreamy-beep.wav-4c1f4706e0c00464dc770cb7d810eb63.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/heart_collected/531508__eponn__soft-dreamy-beep.wav"
+dest_files=[ "res://.import/531508__eponn__soft-dreamy-beep.wav-4c1f4706e0c00464dc770cb7d810eb63.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

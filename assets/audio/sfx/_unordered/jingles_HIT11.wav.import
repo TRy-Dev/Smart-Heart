@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/jingles_HIT11.wav-db03d33550a49b8e1ac70b89c5039d17.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/_unordered/jingles_HIT11.wav"
+dest_files=[ "res://.import/jingles_HIT11.wav-db03d33550a49b8e1ac70b89c5039d17.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

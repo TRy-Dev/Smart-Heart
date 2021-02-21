@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/h2.wav-cfa30fd7c57d83284c174e444301c801.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/heart2/h2.wav"
+dest_files=[ "res://.import/h2.wav-cfa30fd7c57d83284c174e444301c801.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

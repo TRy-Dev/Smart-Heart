@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/footstep_carpet_003.wav-dff839035e327af038d4161300210c13.sample"
+
+[deps]
+
+source_file="res://assets/audio/sfx/hit/footstep_carpet_003.wav"
+dest_files=[ "res://.import/footstep_carpet_003.wav-dff839035e327af038d4161300210c13.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
