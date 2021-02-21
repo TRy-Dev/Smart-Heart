@@ -3,9 +3,6 @@
 Play in browser on [itch.io](https://ryzy27.itch.io/smart-heart)
 
 ![Cover](https://github.com/TRy-Dev/Smart-Heart/blob/master/assets/screenshots/cover.png "Cover")
-![ss1](https://github.com/TRy-Dev/Smart-Heart/blob/master/assets/screenshots/ss1.png "ss1")
-![ss2](https://github.com/TRy-Dev/Smart-Heart/blob/master/assets/screenshots/ss2.png "ss2")
-![ss3](https://github.com/TRy-Dev/Smart-Heart/blob/master/assets/screenshots/ss3.png "ss3")
 
 Entry for Godot Wild Jam #30
 
