@@ -12,7 +12,7 @@ enum GameStates {
 
 const START_STATE = GameStates.DayIntro
 const GAMEPLAY_DURATION = 60.0
-const AFTER_GAMEPLAY_DELAY = 2.0
+const AFTER_GAMEPLAY_DELAY = 3.0
 
 var current_day = -1
 var current_state = -1

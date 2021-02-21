@@ -40,7 +40,7 @@ var _DAY_DATA = {
 	3: { # Elderly
 		"bpm": 100,
 		"heart_alive_time": 9.0,
-		"heart_spawn_rate": 2.25,
+		"heart_spawn_rate": 2.0,
 		"extra_amb": true,
 		"start_delay": 2.0,
 		"traffic": false,
@@ -48,7 +48,7 @@ var _DAY_DATA = {
 	4: { # Game Day
 		"bpm": 120,
 		"heart_alive_time": 8.5,
-		"heart_spawn_rate": 2.0,
+		"heart_spawn_rate": 1.85,
 		"extra_amb": true,
 		"start_delay": 2.0,
 		"traffic": true,

@@ -16,6 +16,7 @@ var beat_count = 0
 var end_scene = preload("res://src/EndScene.tscn")
 
 func start():
+	yield(get_tree().create_timer(2.0), "timeout")
 	my_courtain.play("fade_in")
 	Courtain.play("flash")
 	heartbeat_audio.pitch_scale = PITCH_FROM
